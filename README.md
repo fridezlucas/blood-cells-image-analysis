@@ -4,7 +4,7 @@
 
 | Description | Valeur                                             |
 |-------------|----------------------------------------------------|
-| Cours       | AlgoNum2020                                        |
+| Cours       | Algorithmes Numériques 2020                        |
 | Titre       | Traitement d'images pour nombre de globules blancs |
 | Date        | 10 juin 2020                                       |
 | Auteur      | Lucas Fridez                                       |
@@ -23,9 +23,9 @@ Ci dessous se trouve les objectifs à atteindre pour ce mini-projet :
 
 
 ## Développement
-Afin de développer ce laboratoire, veuillez suivre la procédure suivante :
+Afin de développer ce mini projet, veuillez suivre la procédure suivante :
 
-1. Cloner le laboratoire / Récupérer les nouveaux fichiers `git pull`
+1. Cloner le mini-projet / Récupérer les nouveaux fichiers `git pull`
 2. Se rendre à la racine du dossier `an-white-blood-celles-images-analysis`
 3. Installer `nodejs` et `npm`
 4. Tapez la commande `npm install -g typescript`
