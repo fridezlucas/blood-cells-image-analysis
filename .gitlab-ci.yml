@@ -6,6 +6,8 @@ before_script:
 
 Build:
   stage: build
+  tags:
+    - docker    
   script:
     - npm install
     - npm run build
@@ -13,11 +15,12 @@ Build:
     paths:
         - ./index.html
         - ./app.js
-          
-
     expire_in: 1 week
+
 Deployment:
   stage: deploy
+  tags:
+    - docker
   script:
     - echo "Deploy to staging server"
   environment:
