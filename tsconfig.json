@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "target": "es2015",
+    "sourceMap": false,
+    "noResolve": true
+  },
+  "include": [
+    "./**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

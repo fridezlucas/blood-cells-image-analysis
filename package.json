@@ -1,7 +1,7 @@
 {
   "name": "an-labo4",
   "version": "1.0.0",
-  "description": "Numerical algorithms laboratory number 4 with Stephane Gobron",
+  "description": "Numerical algorithms mini projects with Stephane Gobron",
   "main": "index.js",
   "dependencies": {
     "ts-loader": "^6.2.1",
@@ -15,6 +15,6 @@
     "start": "webpack-dev-server --mode development"
   },
   "keywords": [],
-  "author": "Goffinet Edouard <edouard.goffinet@he-arc.ch>, Sansonnens Rémy <remy.sansonnens@he-arc.ch>, Fridez Lucas <lucas.fridez@he-arc.ch>",
+  "author": "Fridez Lucas <lucas.fridez@he-arc.ch>",
   "license": "ISC"
 }
