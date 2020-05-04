@@ -12,8 +12,9 @@ Build:
   artifacts:
     paths:
         - ./
-    exclude:
-        - ./node_modules
+    ignored_paths:
+        - node_modules/
+          
 
     expire_in: 1 week
 Deployment:
