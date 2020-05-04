@@ -4,13 +4,22 @@
 
 | Description | Valeur                                             |
 |-------------|----------------------------------------------------|
+| Cours       | AlgoNum2020                                        |
 | Titre       | Traitement d'images pour nombre de globules blancs |
 | Date        | 10 juin 2020                                       |
 | Auteur      | Lucas Fridez                                       |
 | Enseignants | Stéphane Gobron & Julien Senn                      |
 
 ## Objectifs
-todo
+
+Ci dessous se trouve les objectifs à atteindre pour ce mini-projet :
+
+1. Récupérer des images de globules blanc
+2. La transformer en image Noir/Blanc à fort contrastes
+3. Faire un spectre des niveaux de gris
+4. Affichage du spectre + calcul du seuil limite
+5. Technique de détourages (Erosion/Dilatation) pour compter les globules blancs sur l'image
+6. Entourer les globules sur l'image.
 
 
 ## Développement
@@ -24,7 +33,8 @@ Afin de développer ce laboratoire, veuillez suivre la procédure suivante :
 6. Afin de développer, un serveur auto rafraîchissant est disponible en tapant la commande `npm start` à la racine du dossier `an-white-blood-cells-images-analysis`.
 
 ### Rendu
-Afin de rendre le laboratoire, il faut lancer la commande `webpack` depuis le dossier `labo4`. Cette commande génère le fichier `*.js` correspondant à tous les fichiers `*.ts`.  
+Afin de rendre le mini projet, il faut lancer la commande `tsc` depuis le dossier `an-white-blood-cells-images-analysis`. Cette commande génère le fichier `*.js` correspondant à tous les fichiers `*.ts`.
+
 L'archive doit contenir :
 - `index.html`
 - `*.js`
@@ -32,7 +42,7 @@ L'archive doit contenir :
 - `tsconfig.json`
 - `src/*.ts`
 
-L'archive se prénomme **AN2020_Labo4_EquipeB3.{zip,tar,7z,rar}**
+L'archive se prénomme **AN2020_MiniProjet_FridezLucas.{zip,tar,7z,rar}**
 
 ## Sources
 * Cours de Messieurs Stéphane Gobron et Julien Senn
