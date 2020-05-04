@@ -11,9 +11,8 @@ Build:
     - npm run build
   artifacts:
     paths:
-        - ./
-    ignored_paths:
-        - node_modules/
+        - ./index.html
+        - ./app.js
           
 
     expire_in: 1 week
