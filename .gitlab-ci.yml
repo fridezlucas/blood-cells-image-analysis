@@ -1,0 +1,27 @@
+image: node:latest
+
+before_script:
+  - apt-get update -qy
+  - apt-get install -y lftp
+
+Build:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+        - ./
+    exclude:
+        - ./node_modules
+
+    expire_in: 1 week
+Deployment:
+  stage: deploy
+  script:
+    - echo "Deploy to staging server"
+  environment:
+    name: Production
+    url: https://an.fridez.dev
+  script:
+    - lftp -e "set ssl:verify-certificate no; open fridez.dev; user $FTP_USERNAME $FTP_PASSWORD; mirror -X .* -X .*/ --reverse --verbose --delete ./ web/an.fridez.dev/; bye"

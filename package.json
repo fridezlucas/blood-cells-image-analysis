@@ -1,5 +1,5 @@
 {
-  "name": "an-labo4",
+  "name": "an-white-blood-cells-images-analysis",
   "version": "1.0.0",
   "description": "Numerical algorithms mini projects with Stephane Gobron",
   "main": "index.js",
@@ -12,6 +12,7 @@
   },
   "devDependencies": {},
   "scripts": {
+    "build": "webpack",
     "start": "webpack-dev-server --mode development"
   },
   "keywords": [],

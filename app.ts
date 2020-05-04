@@ -11,5 +11,5 @@
  * DOM is loaded, time to run mini project ! :-D
  */
 document.addEventListener("DOMContentLoaded", () => {
-
+    console.log("OK");
 });
