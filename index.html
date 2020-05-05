@@ -12,15 +12,37 @@ Version : 2020.05.05
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
     <title>Mini Projet </title>
 </head>
 
 <body>
+
     <h1>Traitement d'images pour nombre de globules blancs</h1>
 
     <h2>Laboratoire</h2>
 
-    <canvas id="canvas" width="1200" height="600"></canvas>
+    <input type="file" id="fileInput" />
+    <div id="container">
+        <div id="analysis">
+            <div class="step">
+                <p>Image originale</p>
+                <canvas id="canvas" width="400" height="400"></canvas>
+            </div>
+            <div class="step">
+                <p>Image noir & blanc</p>
+                <canvas id="canvas" width="400" height="400"></canvas>
+            </div>
+            <div class="step">
+                <p>Spectre d'intensité noir</p>
+                <canvas id="canvas" width="400" height="400"></canvas>
+            </div>
+            <div class="step">
+                <p>Globules entourées; nombre = </p>
+                <canvas id="canvas" width="400" height="400"></canvas>
+            </div>
+        </div>
+    </div>
 
     <h2>Contexte</h2>
 
@@ -39,7 +61,7 @@ Version : 2020.05.05
         Algorithmes numériques - Mini Projet. Lucas Fridez
         (11 juin 2020)
     </footer>
-    
+
     <script src="app.js"></script>
 </body>
 
