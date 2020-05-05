@@ -1,0 +1,27 @@
+#analysis {
+    margin: 20px auto;
+    width: 100%;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-row: auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
+
+.step {
+    max-height: 70vh;
+    border: 1px solid red;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    font-family: sans-serif;
+}
+
+#container {
+    max-width: 1080px;
+    width: 100%;
+    margin: 0 auto;
+}
