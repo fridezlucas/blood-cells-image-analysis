@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function grayscale(input, output) {
+
         //Get the context for the loaded image
         var inputContext = input.getContext("2d");
         //get the image data;
@@ -44,7 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
             //R= i-3, G = i-2 and B = i-1
             //Get our gray shade using the formula
             var gray = 0.3 * data[i - 3] + 0.59 * data[i - 2] + 0.11 * data[i - 1];
+
+            var limit: number = parseInt((<HTMLInputElement>document.getElementById("limit")).value);
+            gray = limit - gray;
+            //console.log(gray);
             //Set our 3 RGB channels to the computed gray.
+
+
             data[i - 3] = gray;
             data[i - 2] = gray;
             data[i - 1] = gray;
@@ -57,6 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
         //Display the output image
         outputContext.putImageData(imageData, 0, 0);
     }
+
+    (<HTMLInputElement>document.getElementById("limit")).addEventListener("change", () => {
+        var input = document.getElementById("canvas");
+        var output = document.getElementById("canvas2");
+        grayscale(input, output);
+    })
 
     function handleFiles(e) {
         var ctx = (<HTMLCanvasElement>document.getElementById('canvas')).getContext('2d');
