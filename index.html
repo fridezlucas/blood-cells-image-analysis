@@ -21,20 +21,21 @@ Version : 2020.05.05
     <h1>Traitement d'images pour nombre de globules blancs</h1>
 
     <input type="file" id="fileInput" />
+    <div class="step">
+        <p>Image originale</p>
+        <canvas id="canvas" width="400" height="400"></canvas>
+    </div>
     <div id="container">
         <input type="range" name="limit" id="limit" min="0" max="255" value="0">
         <div id="analysis">
-            <div class="step">
-                <p>Image originale</p>
-                <canvas id="canvas" width="400" height="400"></canvas>
-            </div>
             <div class="step">
                 <p>Image noir & blanc</p>
                 <canvas id="canvas2" width="400" height="400"></canvas>
             </div>
             <div class="step">
                 <p>Spectre d'intensité noir</p>
-                <canvas id="canvas3" width="400" height="400"></canvas>
+                <canvas id="myChart" width="400" height="300"></canvas>
+                <div id="grayscale-gradient"></div>
             </div>
             <div class="step">
                 <p>Globules entourées; nombre = </p>

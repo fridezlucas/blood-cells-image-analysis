@@ -7,12 +7,49 @@
  * @version : 2020.05.05
  */
 
+import { Chart } from 'chart.js';
+
+function chart(data) {
+    var lab = [];
+
+    for (let i = 0; i < 256; i++) {
+        lab.push(i);
+    }
+
+    var ctx: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: lab,
+            datasets: [{
+                label: 'Number of pixel',
+                data: data,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        maxTicksLimit: 30
+                    }
+                }]
+            }
+        }
+    });
+
+    console.log(myChart.chartArea.left, myChart.chartArea.right, myChart.chartArea.right - myChart.chartArea.left)
+}
+
 /**
  * DOM is loaded, time to run mini project ! :-D
  */
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("OK2");
-
 
     var URL = window.webkitURL || window.URL;
 
@@ -28,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function grayscale(input, output) {
 
-        //Get the context for the loaded image
+        //Get the context for the loaded changechangechange
         var inputContext = input.getContext("2d");
         //get the image data;
         var imageData = inputContext.getImageData(0, 0, input.width, input.height);
@@ -41,15 +78,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //Common formula for converting to grayscale.
         //gray = 0.3*R + 0.59*G + 0.11*B
+
+        var density: any = [];
+        for (let i = 0; i < 256; i++) {
+            density[i] = 0;
+        }
+
         for (var i = arraylength - 1; i > 0; i -= 4) {
             //R= i-3, G = i-2 and B = i-1
             //Get our gray shade using the formula
             var gray = 0.3 * data[i - 3] + 0.59 * data[i - 2] + 0.11 * data[i - 1];
 
             var limit: number = parseInt((<HTMLInputElement>document.getElementById("limit")).value);
-            gray = limit - gray;
+
+            // if(gray > limit) {
+            //     gray = 255;
+            // } else {
+            //     gray = 0;
+            // }
+            //gray = gray < limit ? 0 : gray;
             //console.log(gray);
             //Set our 3 RGB channels to the computed gray.
+
+            density[gray.toFixed(0)] = density[gray.toFixed(0)] + 1;
 
 
             data[i - 3] = gray;
@@ -58,6 +109,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+        console.log(density, arraylength * arraylength);
+
+        chart(density);
+
         //get the output context
         var outputContext = output.getContext("2d");
 
@@ -65,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
         outputContext.putImageData(imageData, 0, 0);
     }
 
-    (<HTMLInputElement>document.getElementById("limit")).addEventListener("change", () => {
+    (<HTMLInputElement>document.getElementById("limit")).addEventListener("input", () => {
         var input = document.getElementById("canvas");
         var output = document.getElementById("canvas2");
         grayscale(input, output);
