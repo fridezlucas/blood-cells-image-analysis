@@ -33,14 +33,31 @@ export abstract class Canvas {
         this.dataMaxHeight = this.canvas.height;
     }
 
+    /**
+     * @return HTML Canvas element
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
     public getCanvas = (): HTMLCanvasElement => {
         return this.canvas;
     }
 
+    /**
+     * @return Context 2d of canvas
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
     public getContext = (): CanvasRenderingContext2D => {
         return this.context;
     }
 
+    /**
+     * Get scaled dimensions of canvas
+     * @param imgWidth width of image
+     * @param imgHeight height of image
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
     public getScaledDim = (imgWidth: any, imgHeight: any): any => {
         let scaled = {
             ratio: imgWidth / imgHeight,
