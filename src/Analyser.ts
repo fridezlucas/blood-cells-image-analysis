@@ -20,6 +20,15 @@ export class Analyser {
     private sliderGrayscaleLimit: HTMLInputElement;
     private inputFile: HTMLInputElement;
 
+    /**
+     * Instanciate a new Analyser
+     * @param lstCanvas Canvas id list
+     * @param idDdlImage select id
+     * @param idSlider slider id
+     * @param idFileInput file input id
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
     public constructor(lstCanvas: CanvasI, idDdlImage: string, idSlider: string, idFileInput: string) {
 
         // Canvas
@@ -34,7 +43,7 @@ export class Analyser {
         this.sliderGrayscaleLimit = <HTMLInputElement>document.getElementById(idSlider);
         this.inputFile = <HTMLInputElement>document.getElementById(idFileInput);
 
-        this.createEvents();
+        this.initEvents();
     }
 
     /**
@@ -48,15 +57,25 @@ export class Analyser {
         })
     }
 
+    /**
+     * Change image to analyse with included images in HTML
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
     private changeImageDdl = () => {
 
     }
 
-    private changeImageFileInput = (e: any) => {
-        console.log("OK");
-
+    /**
+     * Upload another image to analyse it
+     * 
+     * @param e Changed Image event
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
+    private changeImageFileInput = (e: Event) => {
         var reader = new FileReader();
-        var file = e.target.files[0];
+        var file = (<HTMLInputElement>e.target).files[0];
 
         reader.onloadend = () => {
             this.analyse(reader.result);
@@ -65,11 +84,21 @@ export class Analyser {
         reader.readAsDataURL(file);
     }
 
+    /**
+     * Change grayscale limit to do black white transformation
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
     private changeGrayscaleLimit = () => {
         // chartBlackWhite class => set limit
     }
 
-    private createEvents = (): void => {
+    /**
+     * Init all events according to White blood cells analyser
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
+    private initEvents = (): void => {
         this.inputFile.addEventListener('change', this.changeImageFileInput, false);
     }
 
