@@ -4,9 +4,15 @@
  * @author Lucas Fridez <lucas.fridez@he-arc.ch>
  */
 
-import { Canvas } from "./AbstractChart";
+// Imports
+import { Canvas } from "./Canvas";
 import { Chart } from 'chart.js';
 
+/**
+ * SpectrumChart to draw a Chart of black white density pixel from a grayscale image
+ * 
+ * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+ */
 export class SpectrumChart extends Canvas {
 
     // Properties
@@ -14,7 +20,7 @@ export class SpectrumChart extends Canvas {
     private static readonly LABELS_X_AXES: Array<number> = [...Array(256).keys()];
 
     /**
-     * Construct a new SpectrumChart
+     * Instanciate a new SpectrumChart
      * @param idCanvasChart id of canvas to draw a spectrum chart
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
