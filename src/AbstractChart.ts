@@ -16,6 +16,9 @@ export abstract class Canvas {
     protected canvas: HTMLCanvasElement;
     protected context: CanvasRenderingContext2D;
 
+    private dataMaxWidth: number;
+    private dataMaxHeight: number;
+
     /**
      * Construct a new Canvas
      * @param idCanvas id of concerned canvas
@@ -25,6 +28,37 @@ export abstract class Canvas {
     public constructor(idCanvas: string) {
         this.canvas = <HTMLCanvasElement>document.getElementById(idCanvas);
         this.context = <CanvasRenderingContext2D>this.canvas.getContext("2d");
+
+        this.dataMaxWidth = this.canvas.width;
+        this.dataMaxHeight = this.canvas.height;
+    }
+
+    public getCanvas = (): HTMLCanvasElement => {
+        return this.canvas;
+    }
+
+    public getContext = (): CanvasRenderingContext2D => {
+        return this.context;
+    }
+
+    public getScaledDim = (imgWidth: any, imgHeight: any): any => {
+        let scaled = {
+            ratio: imgWidth / imgHeight,
+            width: imgWidth,
+            height: imgHeight
+        }
+
+        if (scaled.width > this.dataMaxWidth) {
+            scaled.width = this.dataMaxWidth;
+            scaled.height = scaled.width / scaled.ratio;
+        }
+
+        if (scaled.height > this.dataMaxHeight) {
+            scaled.height = this.dataMaxHeight;
+            scaled.width = scaled.height / scaled.ratio;
+        }
+
+        return scaled;
     }
 
     /**

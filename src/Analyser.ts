@@ -7,24 +7,30 @@
 import { SpectrumChart } from "./SpectrumChart";
 import CanvasI from "./CanvasI";
 import { Canvas } from "./AbstractChart";
+import { OriginalImage } from "./OriginalImage";
+import { BlackWhiteImage } from "./BlackWhiteImage";
 
 export class Analyser {
 
+    private originalImage: OriginalImage;
+    private blackWhiteImage: BlackWhiteImage;
     private spectrumChart: SpectrumChart;
-    private ddlImages: HTMLUListElement;
+
+    private ddlImages: HTMLSelectElement;
     private sliderGrayscaleLimit: HTMLInputElement;
     private inputFile: HTMLInputElement;
 
     public constructor(lstCanvas: CanvasI, idDdlImage: string, idSlider: string, idFileInput: string) {
+
         // Canvas
-        // canvasoriginal
-        // canvasblackwhite
+        this.originalImage = new OriginalImage(lstCanvas.idCanvasOriginal);
+        this.blackWhiteImage = new BlackWhiteImage(lstCanvas.idCanvasBW);
         this.spectrumChart = new SpectrumChart(lstCanvas.idCanvasChart);
         // canvasprocessing§
         // canvasresult
 
         // Interactable components
-        this.ddlImages = <HTMLUListElement>document.getElementById(idDdlImage);
+        this.ddlImages = <HTMLSelectElement>document.getElementById(idDdlImage);
         this.sliderGrayscaleLimit = <HTMLInputElement>document.getElementById(idSlider);
         this.inputFile = <HTMLInputElement>document.getElementById(idFileInput);
 
@@ -36,8 +42,8 @@ export class Analyser {
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    private clearCanvas = () => {
-        [this.spectrumChart].map((canvas: Canvas) => {
+    private clearAllCanvas = () => {
+        [this.originalImage, this.blackWhiteImage, this.spectrumChart].map((canvas: Canvas) => {
             canvas.clear();
         })
     }
@@ -46,8 +52,17 @@ export class Analyser {
 
     }
 
-    private changeImageFileInput = () => {
+    private changeImageFileInput = (e: any) => {
+        console.log("OK");
 
+        var reader = new FileReader();
+        var file = e.target.files[0];
+
+        reader.onloadend = () => {
+            this.analyse(reader.result);
+        }
+
+        reader.readAsDataURL(file);
     }
 
     private changeGrayscaleLimit = () => {
@@ -55,19 +70,13 @@ export class Analyser {
     }
 
     private createEvents = (): void => {
-
+        this.inputFile.addEventListener('change', this.changeImageFileInput, false);
     }
 
-    public analyse = () => {
-        // todo
-    }
-
-    /**
-     * Clear all canvas before rendering another image !
-     * 
-     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
-     */
-    private clearAllCanvas = () => {
-        // todo...
+    public analyse = async (buffer: string | ArrayBuffer) => {
+        this.clearAllCanvas();
+        await this.originalImage.drawImage(buffer);
+        let arrayDensity: Array<number> = this.blackWhiteImage.drawImage(this.originalImage.getCanvas());
+        this.spectrumChart.drawChart(arrayDensity);
     }
 }
