@@ -1,15 +1,34 @@
 /**
- * 
+ * BlackWhiteImage class
  */
 
+// Imports
 import { Canvas } from "./AbstractChart";
 
+/**
+ * BlackWhiteImage class to define a canvas drawing a grayscale image
+ * 
+ * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+ */
 export class BlackWhiteImage extends Canvas {
 
+    /**
+     * Instanciate a new BlackWhiteImage canvas
+     * @param idCanvasChart id concerned canvas
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
     public constructor(idCanvasChart: string) {
         super(idCanvasChart);
     }
 
+    /**
+     * Draw a grayscaled image from an original source
+     * @param canvasImage HTML Canvas tag from which original image is taken
+     * @return Array<number> densityPixel stats according to grayscaled image
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
     public drawImage = (canvasImage: HTMLCanvasElement): Array<number> => {
         console.log("OK BW");
         
@@ -47,16 +66,10 @@ export class BlackWhiteImage extends Canvas {
 
             density[gray.toFixed(0)] = density[gray.toFixed(0)] + 1;
 
-
             data[i - 3] = gray;
             data[i - 2] = gray;
             data[i - 1] = gray;
-
         }
-
-        //console.log(density, arraylength * arraylength);
-
-        //chart(density);
 
         //Display the output image
         this.context.putImageData(imageData, 0, 0);

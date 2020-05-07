@@ -4,12 +4,19 @@
  * @author Lucas Fridez <lucas.fridez@he-arc.ch>
  */
 
+// Imports
 import { SpectrumChart } from "./SpectrumChart";
 import CanvasI from "./CanvasI";
 import { Canvas } from "./AbstractChart";
 import { OriginalImage } from "./OriginalImage";
 import { BlackWhiteImage } from "./BlackWhiteImage";
 
+/**
+ * Analyser class
+ * 
+ * Contains all canvas to show each step of white blood cells analysing
+ * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+ */
 export class Analyser {
 
     private originalImage: OriginalImage;
