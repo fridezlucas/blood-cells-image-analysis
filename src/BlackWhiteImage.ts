@@ -3,7 +3,7 @@
  */
 
 // Imports
-import { Canvas } from "./AbstractChart";
+import { Canvas } from "./Canvas";
 
 /**
  * BlackWhiteImage class to define a canvas drawing a grayscale image

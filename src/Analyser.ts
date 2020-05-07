@@ -7,7 +7,7 @@
 // Imports
 import { SpectrumChart } from "./SpectrumChart";
 import CanvasI from "./CanvasI";
-import { Canvas } from "./AbstractChart";
+import { Canvas } from "./Canvas";
 import { OriginalImage } from "./OriginalImage";
 import { BlackWhiteImage } from "./BlackWhiteImage";
 
