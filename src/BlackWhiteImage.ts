@@ -27,7 +27,7 @@ export class BlackWhiteImage extends Canvas {
     }
 
     /**
-     * Get binary values [0; 1] from array [0; 255]
+     * Get binary values [0; 1] from array rgb values [0; 255]
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch> 
      */
