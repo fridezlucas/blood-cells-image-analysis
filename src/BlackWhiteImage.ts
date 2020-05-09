@@ -12,6 +12,10 @@ import { Canvas } from "./Canvas";
  */
 export class BlackWhiteImage extends Canvas {
 
+    // Properties
+    private arrayRgbValues: Uint8ClampedArray;
+    private arrayBinaryValues: Array<number>;
+
     /**
      * Instanciate a new BlackWhiteImage canvas
      * @param idCanvasChart id concerned canvas
@@ -20,6 +24,24 @@ export class BlackWhiteImage extends Canvas {
      */
     public constructor(idCanvasChart: string) {
         super(idCanvasChart);
+    }
+
+    /**
+     * Get binary values [0; 1] from array [0; 255]
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch> 
+     */
+    public getBinaryUnits = () => {
+        this.arrayBinaryValues = new Array<number>();
+
+        for (let i = 0; i < this.arrayRgbValues.length; i++) {
+
+            if (i % 4 != 3) {
+                this.arrayBinaryValues.push(this.arrayRgbValues[i] == 255 ? 1 : 0);
+            }
+        }
+
+        return this.arrayBinaryValues;
     }
 
     /**
@@ -67,6 +89,12 @@ export class BlackWhiteImage extends Canvas {
         this.context.canvas.width = canvasImage.width;
         this.context.canvas.height = canvasImage.height;
         this.context.putImageData(imageData, 0, 0);
+
+        this.arrayRgbValues = data;
+
+        this.getBinaryUnits();
+
+        console.log(data, this.arrayBinaryValues);
 
         return density;
     }
