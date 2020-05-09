@@ -26,6 +26,11 @@ export class Analyser {
     private ddlImages: HTMLSelectElement;
     private sliderGrayscaleLimit: HTMLInputElement;
     private inputFile: HTMLInputElement;
+    private checkboxLimit: HTMLInputElement;
+
+    // Options
+    private mustApplyGrayscaleLimit: boolean;
+    private grayscaleLimit: number;
 
     /**
      * Instanciate a new Analyser
@@ -36,19 +41,24 @@ export class Analyser {
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    public constructor(lstCanvas: CanvasI, idDdlImage: string, idSlider: string, idFileInput: string) {
+    public constructor(lstCanvas: CanvasI, idDdlImage: string, idSlider: string, idFileInput: string, idCkbLimit) {
 
         // Canvas
         this.originalImage = new OriginalImage(lstCanvas.idCanvasOriginal);
         this.blackWhiteImage = new BlackWhiteImage(lstCanvas.idCanvasBW);
         this.spectrumChart = new SpectrumChart(lstCanvas.idCanvasChart);
-        // canvasprocessing§
+        // canvasprocessing
         // canvasresult
 
         // Interactable components
         this.ddlImages = <HTMLSelectElement>document.getElementById(idDdlImage);
         this.sliderGrayscaleLimit = <HTMLInputElement>document.getElementById(idSlider);
         this.inputFile = <HTMLInputElement>document.getElementById(idFileInput);
+        this.checkboxLimit = <HTMLInputElement>document.getElementById(idCkbLimit);
+
+        // Options
+        this.mustApplyGrayscaleLimit = false;
+        this.grayscaleLimit = parseInt(this.sliderGrayscaleLimit.value);
 
         this.initEvents();
     }
@@ -76,6 +86,16 @@ export class Analyser {
     }
 
     /**
+     * Click on checkbox to trigger apply limit
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
+    private clickCheckBoxApplyLimit = (e: Event) => {
+        this.mustApplyGrayscaleLimit = (<HTMLInputElement>e.target).checked;
+        this.process();
+    }
+
+    /**
      * Upload another image to analyse it
      * 
      * @param e Changed Image event
@@ -98,8 +118,9 @@ export class Analyser {
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    private changeGrayscaleLimit = () => {
-        // chartBlackWhite class => set limit
+    private changeGrayscaleLimit = (e: Event) => {
+        this.grayscaleLimit = parseInt((<HTMLInputElement>e.target).value);
+        this.process();
     }
 
     /**
@@ -110,12 +131,26 @@ export class Analyser {
     private initEvents = (): void => {
         this.inputFile.addEventListener('change', this.changeImageFileInput, false);
         this.ddlImages.addEventListener("change", this.changeImageDdl);
+        this.checkboxLimit.addEventListener("click", this.clickCheckBoxApplyLimit);
+        this.sliderGrayscaleLimit.addEventListener("change", this.changeGrayscaleLimit);
+        this.sliderGrayscaleLimit.addEventListener("input", (e: Event) => {
+            (<HTMLInputElement>e.target).parentElement.querySelector("span").textContent = (<HTMLInputElement>e.target).value;
+        });
     }
 
     public analyse = async (buffer: string | ArrayBuffer | HTMLImageElement) => {
         this.clearAllCanvas();
         await this.originalImage.drawImage(buffer);
-        let arrayDensity: Array<number> = this.blackWhiteImage.drawImage(this.originalImage.getCanvas());
+        this.process();
+    }
+
+    /**
+     * Process image
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
+    private process = () => {
+        let arrayDensity: Array<number> = this.blackWhiteImage.drawImage(this.originalImage.getCanvas(), this.mustApplyGrayscaleLimit, this.grayscaleLimit);
         this.spectrumChart.drawChart(arrayDensity);
     }
 }

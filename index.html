@@ -41,7 +41,15 @@ Version : 2020.05.05
         <canvas id="canvas" width="400" height="400"></canvas>
     </div>
     <div id="container">
-        <input type="range" name="limit" id="limit" min="0" max="255" value="0">
+        <div>
+            <label for="limit">Seuil du gris/blanc [0; 255]</label>
+            <input type="range" name="limit" id="limit" min="0" max="255" value="0">
+            <span>0</span>
+        </div>
+        <div>
+            <label for="ckbLimit">Appliquer le seuil</label>
+            <input type="checkbox" name="ckbLimit" id="ckbLimit">
+        </div>
         <div id="analysis">
             <div class="step">
                 <p>Image noir & blanc</p>
@@ -74,9 +82,11 @@ Version : 2020.05.05
     <h2>Références</h2>
     <ul>
         <li>Cours de Messieurs Stéphane Gobron et Julien Senn</li>
-        <li>http://www.vapidspace.com/coding/2012/02/26/converting-images-to-grayscale-using-the-canvas/ (5 mai 2020 lu)</li>
-        <li>https://www.f-legrand.fr/scidoc/docmml/image/niveaux/images/images.html</li>
-        <li>https://stackoverflow.com/questions/46399223/async-await-in-image-loading</li>
+        <li>http://www.vapidspace.com/coding/2012/02/26/converting-images-to-grayscale-using-the-canvas/ (5 mai 2020 lu)
+        </li>
+        <li>https://www.f-legrand.fr/scidoc/docmml/image/niveaux/images/images.html (8 mai)</li>
+        <li>https://stackoverflow.com/questions/46399223/async-await-in-image-loading (8 mai)</li>
+        <li>https://stackoverflow.com/questions/42691873/draw-horizontal-line-on-chart-in-chart-js-on-v2 (9 mai)</li>
     </ul>
 
     <footer>

@@ -29,7 +29,7 @@ export class BlackWhiteImage extends Canvas {
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    public drawImage = (canvasImage: HTMLCanvasElement): Array<number> => {
+    public drawImage = (canvasImage: HTMLCanvasElement, mustApplyLimit: boolean, limit: number): Array<number> => {
         var inputContext = canvasImage.getContext("2d");
         var imageData = inputContext.getImageData(0, 0, canvasImage.width, canvasImage.height);
         var data = imageData.data;
@@ -46,15 +46,17 @@ export class BlackWhiteImage extends Canvas {
 
         for (var i = arraylength - 1; i > 0; i -= 4) {
             var gray = 0.3 * data[i - 3] + 0.59 * data[i - 2] + 0.11 * data[i - 1];
-            var limit: number = parseInt((<HTMLInputElement>document.getElementById("limit")).value);
-
-            // if(gray > limit) {
-            //     gray = 255;
-            // } else {
-            //     gray = 0;
-            // }
 
             density[gray.toFixed(0)] = density[gray.toFixed(0)] + 1;
+
+            if (mustApplyLimit) {
+                if (gray > limit) {
+                    gray = 255;
+                } else {
+                    gray = 0;
+                }
+            }
+
 
             data[i - 3] = gray;
             data[i - 2] = gray;
