@@ -69,8 +69,10 @@ export class Analyser {
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    private changeImageDdl = () => {
-
+    private changeImageDdl = (e: Event) => {
+        // (<HTMLSelectElement>e.target).value => select value
+        let index: number = parseInt((<HTMLSelectElement>e.target).value) - 1;
+        this.analyse(<HTMLImageElement>document.querySelectorAll("#images img")[index]);
     }
 
     /**
@@ -107,9 +109,10 @@ export class Analyser {
      */
     private initEvents = (): void => {
         this.inputFile.addEventListener('change', this.changeImageFileInput, false);
+        this.ddlImages.addEventListener("change", this.changeImageDdl);
     }
 
-    public analyse = async (buffer: string | ArrayBuffer) => {
+    public analyse = async (buffer: string | ArrayBuffer | HTMLImageElement) => {
         this.clearAllCanvas();
         await this.originalImage.drawImage(buffer);
         let arrayDensity: Array<number> = this.blackWhiteImage.drawImage(this.originalImage.getCanvas());

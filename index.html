@@ -22,9 +22,20 @@ Version : 2020.05.05
 
     <input type="file" id="fileInput" />
     <select name="" id="selectImage">
-        <option value="1">1</option>
-        <option value="2">2</option>
+        <option value="0" selected disabled>Selectionner une image</option>
+        <option value="1">Image 1</option>
+        <option value="2">Image 2</option>
+        <option value="3">Image 3</option>
+        <option value="4">Image 4</option>
     </select>
+
+    <div id="images">
+        <img src="img/white-blood-cells-1.jpeg" alt="Image 1">
+        <img src="img/white-blood-cells-2.jpg" alt="Image 2">
+        <img src="img/white-blood-cells-3.jpg" alt="Image 3">
+        <img src="img/white-blood-cells-4.jpg" alt="Image 4">
+    </div>
+
     <div class="step">
         <p>Image originale</p>
         <canvas id="canvas" width="400" height="400"></canvas>

@@ -30,8 +30,6 @@ export class BlackWhiteImage extends Canvas {
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     public drawImage = (canvasImage: HTMLCanvasElement): Array<number> => {
-        console.log("OK BW");
-        
         //Get the context for the loaded changechangechange
         var inputContext = canvasImage.getContext("2d");
         //get the image data;
@@ -72,6 +70,8 @@ export class BlackWhiteImage extends Canvas {
         }
 
         //Display the output image
+        this.context.canvas.width = canvasImage.width;
+        this.context.canvas.height = canvasImage.height;
         this.context.putImageData(imageData, 0, 0);
 
         return density;
