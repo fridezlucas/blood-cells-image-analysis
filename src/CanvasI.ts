@@ -5,6 +5,7 @@
  */
 export default interface CanvasI {
     idCanvasOriginal: string;
+    idCanvasGray: string;
     idCanvasBW: string;
     idCanvasChart: string;
     idCanvasProcessing: string;

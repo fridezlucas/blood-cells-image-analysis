@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let WhiteBloodAnalyser: Analyser = new Analyser({
         idCanvasOriginal: "canvas",
+        idCanvasGray: "canvas-gray",
         idCanvasBW: "canvas2",
         idCanvasChart: "myChart",
         idCanvasProcessing: "canvas4",

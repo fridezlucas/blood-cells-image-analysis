@@ -36,10 +36,6 @@ Version : 2020.05.05
         <img src="img/white-blood-cells-4.jpg" alt="Image 4">
     </div>
 
-    <div class="step">
-        <p>Image originale</p>
-        <canvas id="canvas" width="400" height="400"></canvas>
-    </div>
     <div id="container">
         <div>
             <label for="limit">Seuil du gris/blanc [0; 255]</label>
@@ -51,6 +47,14 @@ Version : 2020.05.05
             <input type="checkbox" name="ckbLimit" id="ckbLimit">
         </div>
         <div id="analysis">
+            <div class="step">
+                <p>Image originale</p>
+                <canvas id="canvas" width="400" height="400"></canvas>
+            </div>
+            <div class="step">
+                <p>Image niveaux de gris</p>
+                <canvas id="canvas-gray" width="400" height="400"></canvas>
+            </div>
             <div class="step">
                 <p>Image noir & blanc</p>
                 <canvas id="canvas2" width="400" height="400"></canvas>

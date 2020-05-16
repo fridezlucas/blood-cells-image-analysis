@@ -9,6 +9,7 @@ import { SpectrumChart } from "./SpectrumChart";
 import CanvasI from "./CanvasI";
 import { Canvas } from "./Canvas";
 import { OriginalImage } from "./OriginalImage";
+import { GrayscaleImage } from "./GrayscaleImage";
 import { BlackWhiteImage } from "./BlackWhiteImage";
 
 /**
@@ -20,8 +21,10 @@ import { BlackWhiteImage } from "./BlackWhiteImage";
 export class Analyser {
 
     private originalImage: OriginalImage;
-    private blackWhiteImage: BlackWhiteImage;
+    private grayscaleImage: GrayscaleImage;
+    private bwImage: BlackWhiteImage;
     private spectrumChart: SpectrumChart;
+
 
     private ddlImages: HTMLSelectElement;
     private sliderGrayscaleLimit: HTMLInputElement;
@@ -45,7 +48,8 @@ export class Analyser {
 
         // Canvas
         this.originalImage = new OriginalImage(lstCanvas.idCanvasOriginal);
-        this.blackWhiteImage = new BlackWhiteImage(lstCanvas.idCanvasBW);
+        this.grayscaleImage = new GrayscaleImage(lstCanvas.idCanvasGray);
+        this.bwImage = new BlackWhiteImage(lstCanvas.idCanvasBW)
         this.spectrumChart = new SpectrumChart(lstCanvas.idCanvasChart);
         // canvasprocessing
         // canvasresult
@@ -69,7 +73,7 @@ export class Analyser {
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     private clearAllCanvas = () => {
-        [this.originalImage, this.blackWhiteImage, this.spectrumChart].map((canvas: Canvas) => {
+        [this.originalImage, this.grayscaleImage, this.spectrumChart].map((canvas: Canvas) => {
             canvas.clear();
         })
     }
@@ -150,7 +154,10 @@ export class Analyser {
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     private process = () => {
-        let arrayDensity: Array<number> = this.blackWhiteImage.drawImage(this.originalImage.getCanvas(), this.mustApplyGrayscaleLimit, this.grayscaleLimit);
+        let arrayDensity: Array<number> = this.grayscaleImage.drawImage(this.originalImage.getCanvas());
+        this.bwImage.drawImage(this.grayscaleImage.getCanvas(), this.grayscaleLimit);
         this.spectrumChart.drawChart(arrayDensity);
+        this.bwImage.getBinaryUnits();
+        console.log("Analyser -> privateprocess -> this.bwImage.getBinaryUnits()", this.bwImage.getBinaryUnits())
     }
 }
