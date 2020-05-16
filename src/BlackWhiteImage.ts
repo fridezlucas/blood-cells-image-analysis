@@ -45,7 +45,7 @@ export class BlackWhiteImage extends Canvas {
     }
 
     /**
-     * Draw a grayscaled image from an original source
+     * Draw a black and white image from an original source
      * @param canvasImage HTML Canvas tag from which original image is taken
      * @return Array<number> densityPixel stats according to grayscaled image
      * 
@@ -62,7 +62,7 @@ export class BlackWhiteImage extends Canvas {
             let gray: number = 0;
 
             if (data[i - 1] > limit) {
-                
+
                 gray = 255;
             } else {
                 gray = 0;

@@ -25,7 +25,6 @@ export class Analyser {
     private bwImage: BlackWhiteImage;
     private spectrumChart: SpectrumChart;
 
-
     private ddlImages: HTMLSelectElement;
     private sliderGrayscaleLimit: HTMLInputElement;
     private inputFile: HTMLInputElement;
@@ -142,6 +141,11 @@ export class Analyser {
         });
     }
 
+    /**
+     * Analyse image
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
     public analyse = async (buffer: string | ArrayBuffer | HTMLImageElement) => {
         this.clearAllCanvas();
         await this.originalImage.drawImage(buffer);

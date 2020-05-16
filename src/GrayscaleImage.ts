@@ -1,19 +1,19 @@
 /**
- * BlackWhiteImage class
+ * GrayscaleImage class
  */
 
 // Imports
 import { Canvas } from "./Canvas";
 
 /**
- * BlackWhiteImage class to define a canvas drawing a grayscale image
+ * GrayscaleImage class to define a canvas drawing a grayscale image
  * 
  * @author Lucas Fridez <lucas.fridez@he-arc.ch>
  */
 export class GrayscaleImage extends Canvas {
 
     /**
-     * Instanciate a new BlackWhiteImage canvas
+     * Instanciate a new GrayscaleImage canvas
      * @param idCanvasChart id concerned canvas
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
