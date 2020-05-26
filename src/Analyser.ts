@@ -11,6 +11,7 @@ import { Canvas } from "./Canvas";
 import { OriginalImage } from "./OriginalImage";
 import { GrayscaleImage } from "./GrayscaleImage";
 import { BlackWhiteImage } from "./BlackWhiteImage";
+import { ProcessingImage } from "./ProcessingImage";
 
 /**
  * Analyser class
@@ -24,6 +25,7 @@ export class Analyser {
     private grayscaleImage: GrayscaleImage;
     private bwImage: BlackWhiteImage;
     private spectrumChart: SpectrumChart;
+    private processingChart: ProcessingImage;
 
     private ddlImages: HTMLSelectElement;
     private sliderGrayscaleLimit: HTMLInputElement;
@@ -50,7 +52,7 @@ export class Analyser {
         this.grayscaleImage = new GrayscaleImage(lstCanvas.idCanvasGray);
         this.bwImage = new BlackWhiteImage(lstCanvas.idCanvasBW)
         this.spectrumChart = new SpectrumChart(lstCanvas.idCanvasChart);
-        // canvasprocessing
+        this.processingChart = new ProcessingImage(lstCanvas.idCanvasProcessing);
         // canvasresult
 
         // Interactable components
@@ -72,7 +74,7 @@ export class Analyser {
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     private clearAllCanvas = () => {
-        [this.originalImage, this.grayscaleImage, this.spectrumChart].map((canvas: Canvas) => {
+        [this.originalImage, this.grayscaleImage, this.spectrumChart, this.processingChart].map((canvas: Canvas) => {
             canvas.clear();
         })
     }
@@ -161,7 +163,7 @@ export class Analyser {
         let arrayDensity: Array<number> = this.grayscaleImage.drawImage(this.originalImage.getCanvas());
         this.bwImage.drawImage(this.grayscaleImage.getCanvas(), this.grayscaleLimit);
         this.spectrumChart.drawChart(arrayDensity);
-        this.bwImage.getBinaryUnits();
+        this.processingChart.drawImage(this.bwImage.getBinaryUnits(), this.bwImage.getCanvas().width, this.bwImage.getCanvas().height);
         console.log("Analyser -> privateprocess -> this.bwImage.getBinaryUnits()", this.bwImage.getBinaryUnits())
     }
 }

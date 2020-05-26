@@ -36,8 +36,8 @@ export class BlackWhiteImage extends Canvas {
 
         for (let i = 0; i < this.arrayRgbValues.length; i++) {
 
-            if (i % 4 != 3) {
-                this.arrayBinaryValues.push(this.arrayRgbValues[i] == 255 ? 1 : 0);
+            if (i % 4 == 0) {
+                this.arrayBinaryValues.push(this.arrayRgbValues[i] == 255 ? 0 : 1);
             }
         }
 
