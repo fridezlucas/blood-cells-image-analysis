@@ -57,7 +57,7 @@ export class GrayscaleImage extends Canvas {
         //Display the output image
         this.context.canvas.width = canvasImage.width;
         this.context.canvas.height = canvasImage.height;
-        this.context.putImageData(imageData, 0, 0);
+        this.context.putImageData(imageData, 0, 0);        
 
         return density;
     }
