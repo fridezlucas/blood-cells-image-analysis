@@ -22,5 +22,5 @@ document.addEventListener("DOMContentLoaded", () => {
         idCanvasChart: "myChart",
         idCanvasProcessing: "canvas4",
         idCanvasResult: "canvas5"
-    }, "selectImage", "limit", "fileInput", "ckbLimit");
+    }, "selectImage", "limitMin", "limitMax", "fileInput");
 });

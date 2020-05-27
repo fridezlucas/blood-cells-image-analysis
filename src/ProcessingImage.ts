@@ -58,11 +58,6 @@ export class ProcessingImage extends Canvas {
         let t = new Morph(width, height, bits);
         this.context.createImageData(width, height);
         
-        t.erodeWithElement();
-        t.erodeWithElement();
-        t.erodeWithElement();
-        t.dilateWithElement();
-        t.dilateWithElement();
         t.dilateWithElement();
         t.dilateWithElement();
         this.getRGBValues(t.data, width, height);

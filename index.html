@@ -39,12 +39,16 @@ Version : 2020.05.05
     <div id="container">
         <div>
             <label for="limit">Seuil du gris/blanc [0; 255]</label>
-            <input type="range" name="limit" id="limit" min="0" max="255" value="0">
-            <span>0</span>
-        </div>
-        <div>
-            <label for="ckbLimit">Appliquer le seuil</label>
-            <input type="checkbox" name="ckbLimit" id="ckbLimit">
+            <div>
+                <i>Minimum :</i>
+                <input type="range" name="limitMin" id="limitMin" min="0" max="255" value="180">
+                <span>180</span>
+            </div>
+            <div>
+                <i>Maximum :</i>
+                <input type="range" name="limitMax" id="limitMax" min="0" max="255" value="220">
+                <span>220</span>
+            </div>
         </div>
         <div id="analysis">
             <div class="step">

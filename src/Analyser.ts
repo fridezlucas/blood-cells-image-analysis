@@ -28,24 +28,26 @@ export class Analyser {
     private processingChart: ProcessingImage;
 
     private ddlImages: HTMLSelectElement;
-    private sliderGrayscaleLimit: HTMLInputElement;
+    private sliderGrayscaleLimitMin: HTMLInputElement;
+    private sliderGrayscaleLimitMax: HTMLInputElement;
     private inputFile: HTMLInputElement;
-    private checkboxLimit: HTMLInputElement;
 
     // Options
     private mustApplyGrayscaleLimit: boolean;
-    private grayscaleLimit: number;
+    private grayscaleLimitMin: number;
+    private grayscaleLimitMax: number;
 
     /**
      * Instanciate a new Analyser
      * @param lstCanvas Canvas id list
      * @param idDdlImage select id
-     * @param idSlider slider id
+     * @param idSliderMin sliderMin id
+     * @param idSliderMax sliderMax id
      * @param idFileInput file input id
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    public constructor(lstCanvas: CanvasI, idDdlImage: string, idSlider: string, idFileInput: string, idCkbLimit) {
+    public constructor(lstCanvas: CanvasI, idDdlImage: string, idSliderMin: string, idSliderMax: string, idFileInput: string) {
 
         // Canvas
         this.originalImage = new OriginalImage(lstCanvas.idCanvasOriginal);
@@ -57,13 +59,14 @@ export class Analyser {
 
         // Interactable components
         this.ddlImages = <HTMLSelectElement>document.getElementById(idDdlImage);
-        this.sliderGrayscaleLimit = <HTMLInputElement>document.getElementById(idSlider);
+        this.sliderGrayscaleLimitMin = <HTMLInputElement>document.getElementById(idSliderMin);
+        this.sliderGrayscaleLimitMax = <HTMLInputElement>document.getElementById(idSliderMax);
         this.inputFile = <HTMLInputElement>document.getElementById(idFileInput);
-        this.checkboxLimit = <HTMLInputElement>document.getElementById(idCkbLimit);
 
         // Options
         this.mustApplyGrayscaleLimit = false;
-        this.grayscaleLimit = parseInt(this.sliderGrayscaleLimit.value);
+        this.grayscaleLimitMin = parseInt(this.sliderGrayscaleLimitMin.value);
+        this.grayscaleLimitMax = parseInt(this.sliderGrayscaleLimitMax.value);
 
         this.initEvents();
     }
@@ -91,16 +94,6 @@ export class Analyser {
     }
 
     /**
-     * Click on checkbox to trigger apply limit
-     * 
-     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
-     */
-    private clickCheckBoxApplyLimit = (e: Event) => {
-        this.mustApplyGrayscaleLimit = (<HTMLInputElement>e.target).checked;
-        this.process();
-    }
-
-    /**
      * Upload another image to analyse it
      * 
      * @param e Changed Image event
@@ -123,8 +116,18 @@ export class Analyser {
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    private changeGrayscaleLimit = (e: Event) => {
-        this.grayscaleLimit = parseInt((<HTMLInputElement>e.target).value);
+    private changeGrayscaleLimitMin = (e: Event) => {
+        this.grayscaleLimitMin = parseInt((<HTMLInputElement>e.target).value);
+        this.process();
+    }
+
+    /**
+     * Change grayscale limit to do black white transformation
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
+    private changeGrayscaleLimitMax = (e: Event) => {
+        this.grayscaleLimitMax = parseInt((<HTMLInputElement>e.target).value);
         this.process();
     }
 
@@ -136,9 +139,12 @@ export class Analyser {
     private initEvents = (): void => {
         this.inputFile.addEventListener('change', this.changeImageFileInput, false);
         this.ddlImages.addEventListener("change", this.changeImageDdl);
-        this.checkboxLimit.addEventListener("click", this.clickCheckBoxApplyLimit);
-        this.sliderGrayscaleLimit.addEventListener("change", this.changeGrayscaleLimit);
-        this.sliderGrayscaleLimit.addEventListener("input", (e: Event) => {
+        this.sliderGrayscaleLimitMin.addEventListener("change", this.changeGrayscaleLimitMin);
+        this.sliderGrayscaleLimitMax.addEventListener("change", this.changeGrayscaleLimitMax);
+        this.sliderGrayscaleLimitMin.addEventListener("input", (e: Event) => {
+            (<HTMLInputElement>e.target).parentElement.querySelector("span").textContent = (<HTMLInputElement>e.target).value;
+        });
+        this.sliderGrayscaleLimitMax.addEventListener("input", (e: Event) => {
             (<HTMLInputElement>e.target).parentElement.querySelector("span").textContent = (<HTMLInputElement>e.target).value;
         });
     }
@@ -161,7 +167,7 @@ export class Analyser {
      */
     private process = () => {
         let arrayDensity: Array<number> = this.grayscaleImage.drawImage(this.originalImage.getCanvas());
-        this.bwImage.drawImage(this.grayscaleImage.getCanvas(), this.grayscaleLimit);
+        this.bwImage.drawImage(this.grayscaleImage.getCanvas(), this.grayscaleLimitMin, this.grayscaleLimitMax);
         this.spectrumChart.drawChart(arrayDensity);
         this.processingChart.drawImage(this.bwImage.getBinaryUnits(), this.bwImage.getCanvas().width, this.bwImage.getCanvas().height);
         console.log("Analyser -> privateprocess -> this.bwImage.getBinaryUnits()", this.bwImage.getBinaryUnits())

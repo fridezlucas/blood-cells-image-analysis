@@ -51,7 +51,7 @@ export class BlackWhiteImage extends Canvas {
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    public drawImage = (canvasImage: HTMLCanvasElement, limit: number): void => {
+    public drawImage = (canvasImage: HTMLCanvasElement, limitMin: number, limitMax: number): void => {
         var inputContext = canvasImage.getContext("2d");
         var imageData = inputContext.getImageData(0, 0, canvasImage.width, canvasImage.height);
         var data = imageData.data;
@@ -61,11 +61,10 @@ export class BlackWhiteImage extends Canvas {
         for (var i = arraylength - 1; i > 0; i -= 4) {
             let gray: number = 0;
 
-            if (data[i - 1] > limit) {
-
-                gray = 255;
-            } else {
+            if (data[i - 1] >= limitMin && data[i - 1] <= limitMax) {
                 gray = 0;
+            } else {
+                gray = 255;
             }
 
             data[i - 3] = gray;
