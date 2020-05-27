@@ -13,30 +13,23 @@ Version : 2020.05.05
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Mini Projet </title>
+    <title>AN2020 - Fridez Lucas - Mini Projet</title>
 </head>
 
 <body>
 
     <h1>Traitement d'images pour nombre de globules blancs</h1>
 
-    <input type="file" id="fileInput" />
-    <select name="" id="selectImage">
-        <option value="0" selected disabled>Selectionner une image</option>
-        <option value="1">Image 1</option>
-        <option value="2">Image 2</option>
-        <option value="3">Image 3</option>
-        <option value="4">Image 4</option>
-    </select>
-
-    <div id="images">
-        <img src="img/white-blood-cells-1.jpeg" alt="Image 1">
-        <img src="img/white-blood-cells-2.jpg" alt="Image 2">
-        <img src="img/white-blood-cells-3.jpg" alt="Image 3">
-        <img src="img/white-blood-cells-4.jpg" alt="Image 4">
-    </div>
-
-    <div id="container">
+    <fieldset>
+        <legend>Interactions utilisateurs</legend>
+        <input type="file" id="fileInput" />
+        <select name="" id="selectImage">
+            <option value="0" selected disabled>Selectionner une image</option>
+            <option value="1">Image 1</option>
+            <option value="2">Image 2</option>
+            <option value="3">Image 3</option>
+            <option value="4">Image 4</option>
+        </select>
         <div>
             <label for="limit">Seuil du gris/blanc [0; 255]</label>
             <div>
@@ -50,6 +43,17 @@ Version : 2020.05.05
                 <span>220</span>
             </div>
         </div>
+    </fieldset>
+
+
+    <div id="images">
+        <img src="img/white-blood-cells-1.jpeg" alt="Image 1">
+        <img src="img/white-blood-cells-2.jpg" alt="Image 2">
+        <img src="img/white-blood-cells-3.jpg" alt="Image 3">
+        <img src="img/white-blood-cells-4.jpg" alt="Image 4">
+    </div>
+
+    <div id="container">
         <div id="analysis">
             <div class="step">
                 <p>1. Image originale</p>
@@ -81,11 +85,19 @@ Version : 2020.05.05
 
     <h2>Contexte</h2>
 
+
     <h2>Méthodologie</h2>
+    <p>La démarche pour dénombrer les globules blancs sur une image est la suivante :</p>
+    <ol>
+        <li>Récupérer l'image originale</li>
+        <li>Transformer l'image en niveau de gris</li>
+        <li>Dessiner un graphique du spectre d'intensité de l'image en niveaux de gris [0; 255]</li>
+        <li>Créer une image en noir et blanc (binaire {0; 1})</li>
+        <li>Effectuer un <i>Image Processing</i></li>
+        <li>Entourer les globules trouvés</li>
+    </ol>
 
     <h2>Conclusion</h2>
-
-    <h2>Bonus</h2>
 
     <h2>Références</h2>
     <ul>
@@ -98,8 +110,8 @@ Version : 2020.05.05
     </ul>
 
     <footer>
-        Algorithmes numériques - Mini Projet. Lucas Fridez
-        (11 juin 2020)
+        <p>Algorithmes numériques - Mini Projet. Lucas Fridez (11 juin 2020)</p>
+        <p>A destination de Monsieur Stéphane Gobron</p>
     </footer>
 
     <script src="src/morph.js"></script>
