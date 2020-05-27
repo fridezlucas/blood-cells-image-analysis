@@ -73,7 +73,7 @@ export class SpectrumChart extends Canvas {
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    public drawChart = (data: Array<number>): void => {
+    public drawChart = (data: Array<number>, min: number, max: number): void => {
         var myChart = new Chart(this.context, {
             type: 'bar',
             data: {
@@ -84,7 +84,7 @@ export class SpectrumChart extends Canvas {
                     borderWidth: 1
                 }]
             },
-            lineAtIndex: [{ text: "Minimum", index: 170 }, { text: "Maximum", index: 225 }],
+            lineAtIndex: [{ text: "Minimum", index: min }, { text: "Maximum", index: max }],
             options: {
                 scales: {
                     yAxes: [{

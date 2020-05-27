@@ -168,7 +168,7 @@ export class Analyser {
     private process = () => {
         let arrayDensity: Array<number> = this.grayscaleImage.drawImage(this.originalImage.getCanvas());
         this.bwImage.drawImage(this.grayscaleImage.getCanvas(), this.grayscaleLimitMin, this.grayscaleLimitMax);
-        this.spectrumChart.drawChart(arrayDensity);
+        this.spectrumChart.drawChart(arrayDensity, this.grayscaleLimitMin, this.grayscaleLimitMax);
         this.processingChart.drawImage(this.bwImage.getBinaryUnits(), this.bwImage.getCanvas().width, this.bwImage.getCanvas().height);
         console.log("Analyser -> privateprocess -> this.bwImage.getBinaryUnits()", this.bwImage.getBinaryUnits())
     }
