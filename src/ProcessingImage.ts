@@ -60,6 +60,9 @@ export class ProcessingImage extends Canvas {
         
         t.dilateWithElement();
         t.dilateWithElement();
+
+        this.canvas.width = width;
+        this.canvas.height = height;
         this.getRGBValues(t.data, width, height);
     }
 }

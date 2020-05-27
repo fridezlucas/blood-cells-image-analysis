@@ -84,7 +84,7 @@ export class SpectrumChart extends Canvas {
                     borderWidth: 1
                 }]
             },
-            lineAtIndex: [{ text: "Minimum", index: min }, { text: "Maximum", index: max }],
+            lineAtIndex: [{ text: "Min", index: min }, { text: "Max", index: max }],
             options: {
                 scales: {
                     yAxes: [{
