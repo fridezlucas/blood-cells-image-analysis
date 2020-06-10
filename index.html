@@ -47,6 +47,23 @@ Version : 2020.05.05
                 <input type="range" name="maxBlack" id="maxBlack" min="0" max="255" value="240">
                 <span>240</span>
             </div>
+            <div>
+                <p>Image Processing options</p>
+                <ul>
+                    <li>
+                        <input type="checkbox" name="cbApplyErosion" id="cbApplyErosion" checked>
+                        <label for="cbApplyErosion">Apply erosion</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="cbApplyDilation" id="cbApplyDilation" checked>
+                        <label for="cbApplyDilation">Apply dilation</label>
+                    </li>
+                    <li>
+                        <label for="txtCellSize">Taille de cellule</label>
+                        <input type="number" value="40" name="txtCellSize" id="txtCellSize">
+                    </li>
+                </ul>
+            </div>
         </div>
     </fieldset>
 
