@@ -12,6 +12,7 @@ import { OriginalImage } from "./OriginalImage";
 import { GrayscaleImage } from "./GrayscaleImage";
 import { BlackWhiteImage } from "./BlackWhiteImage";
 import { ProcessingImage } from "./ProcessingImage";
+import { Slider } from "./Slider";
 
 /**
  * Analyser class
@@ -28,16 +29,13 @@ export class Analyser {
     private processingChart: ProcessingImage;
 
     private ddlImages: HTMLSelectElement;
-    private sliderGrayscaleLimitMin: HTMLInputElement;
-    private sliderGrayscaleLimitMax: HTMLInputElement;
-    private sliderLimitGraph: HTMLInputElement;
+    private sliderGrayscaleLimitMin: Slider;
+    private sliderGrayscaleLimitMax: Slider;
+    private sliderLimitGraph: Slider;
     private inputFile: HTMLInputElement;
 
     // Options
     private mustApplyGrayscaleLimit: boolean;
-    private grayscaleLimitMin: number;
-    private grayscaleLimitMax: number;
-    private limitGraph: number;
 
     /**
      * Instanciate a new Analyser
@@ -61,16 +59,13 @@ export class Analyser {
 
         // Interactable components
         this.ddlImages = <HTMLSelectElement>document.getElementById(idDdlImage);
-        this.sliderGrayscaleLimitMin = <HTMLInputElement>document.getElementById(idSliderMin);
-        this.sliderGrayscaleLimitMax = <HTMLInputElement>document.getElementById(idSliderMax);
-        this.sliderLimitGraph = <HTMLInputElement>document.getElementById(idMaxGraph);
+        this.sliderGrayscaleLimitMin = new Slider(idSliderMin, this.process);
+        this.sliderGrayscaleLimitMax = new Slider(idSliderMax, this.process);
+        this.sliderLimitGraph = new Slider(idMaxGraph, this.process);
         this.inputFile = <HTMLInputElement>document.getElementById(idFileInput);
 
         // Options
         this.mustApplyGrayscaleLimit = false;
-        this.grayscaleLimitMin = parseInt(this.sliderGrayscaleLimitMin.value);
-        this.grayscaleLimitMax = parseInt(this.sliderGrayscaleLimitMax.value);
-        this.limitGraph = parseInt(this.sliderLimitGraph.value);
 
         this.initEvents();
     }
@@ -116,36 +111,6 @@ export class Analyser {
     }
 
     /**
-     * Change grayscale limit to do black white transformation
-     * 
-     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
-     */
-    private changeGrayscaleLimitMin = (e: Event) => {
-        this.grayscaleLimitMin = parseInt((<HTMLInputElement>e.target).value);
-        this.process();
-    }
-
-    /**
-     * Change grayscale limit to do black white transformation
-     * 
-     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
-     */
-    private changeGrayscaleLimitMax = (e: Event) => {
-        this.grayscaleLimitMax = parseInt((<HTMLInputElement>e.target).value);
-        this.process();
-    }
-
-    /**
-     * Change grayscale limit to do black white transformation
-     * 
-     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
-     */
-    private changeLimitGraph = (e: Event) => {
-        this.limitGraph = parseInt((<HTMLInputElement>e.target).value);
-        this.process();
-    }
-
-    /**
      * Init all events according to White blood cells analyser
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
@@ -153,18 +118,6 @@ export class Analyser {
     private initEvents = (): void => {
         this.inputFile.addEventListener('change', this.changeImageFileInput, false);
         this.ddlImages.addEventListener("change", this.changeImageDdl);
-        this.sliderGrayscaleLimitMin.addEventListener("change", this.changeGrayscaleLimitMin);
-        this.sliderGrayscaleLimitMax.addEventListener("change", this.changeGrayscaleLimitMax);
-        this.sliderLimitGraph.addEventListener("change", this.changeLimitGraph);
-        this.sliderGrayscaleLimitMin.addEventListener("input", (e: Event) => {
-            (<HTMLInputElement>e.target).parentElement.querySelector("span").textContent = (<HTMLInputElement>e.target).value;
-        });
-        this.sliderGrayscaleLimitMax.addEventListener("input", (e: Event) => {
-            (<HTMLInputElement>e.target).parentElement.querySelector("span").textContent = (<HTMLInputElement>e.target).value;
-        });
-        this.sliderLimitGraph.addEventListener("input", (e: Event) => {
-            (<HTMLInputElement>e.target).parentElement.querySelector("span").textContent = (<HTMLInputElement>e.target).value;
-        });
     }
 
     /**
@@ -184,10 +137,12 @@ export class Analyser {
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     private process = () => {
+        let grayscaleLimitMin: number = this.sliderGrayscaleLimitMin.getValue();
+        let grayscaleLimitMax: number = this.sliderGrayscaleLimitMax.getValue();
+        let limitGraph: number = this.sliderLimitGraph.getValue();
         let arrayDensity: Array<number> = this.grayscaleImage.drawImage(this.originalImage.getCanvas());
-        this.bwImage.drawImage(this.grayscaleImage.getCanvas(), this.grayscaleLimitMin, this.grayscaleLimitMax);
-        this.spectrumChart.drawChart(arrayDensity, this.grayscaleLimitMin, this.grayscaleLimitMax, this.limitGraph);
+        this.bwImage.drawImage(this.grayscaleImage.getCanvas(), grayscaleLimitMin, grayscaleLimitMax);
+        this.spectrumChart.drawChart(arrayDensity, grayscaleLimitMin, grayscaleLimitMax, limitGraph);
         this.processingChart.drawImage(this.bwImage.getBinaryUnits(), this.bwImage.getCanvas().width, this.bwImage.getCanvas().height);
-        console.log("Analyser -> privateprocess -> this.bwImage.getBinaryUnits()", this.bwImage.getBinaryUnits())
     }
 }

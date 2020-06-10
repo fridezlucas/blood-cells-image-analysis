@@ -68,8 +68,6 @@ export class ProcessingImage extends Canvas {
         this.context.createImageData(width, height);
 
         if (this.applyErosion) {
-            console.log("OK");
-            
             t.erodeWithElement();
         }
         if (this.applyDilation) {
