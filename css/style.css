@@ -29,12 +29,6 @@
     margin: 0 auto;
 }
 
-#grayscale-gradient {
-    background: linear-gradient(to left, #fff, #000);
-    width: 100%;
-    height: 20px;
-}
-
 #images {
     display: none;
 }
