@@ -55,7 +55,7 @@ export class SpectrumChart extends Canvas {
 
     // Properties
     private arrayDensityPixels: Array<number>;
-    private static readonly LABELS_X_AXES: Array<number> = [...Array(256).keys()];
+    private chart: any;
 
     /**
      * Instanciate a new SpectrumChart
@@ -65,6 +65,7 @@ export class SpectrumChart extends Canvas {
      */
     public constructor(idCanvasChart: string) {
         super(idCanvasChart);
+        this.chart = null;
         this.arrayDensityPixels = new Array<number>();
     }
 
@@ -73,11 +74,22 @@ export class SpectrumChart extends Canvas {
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    public drawChart = (data: Array<number>, min: number, max: number): void => {
-        var myChart = new Chart(this.context, {
+    public drawChart = (data: Array<number>, min: number, max: number, limit: number): void => {
+        let xAxis: Array<number> = [...Array(limit + 1).keys()];
+
+        data = data
+        while(data.length > limit) {
+            data.pop();
+        }
+
+        if(this.chart != null) {
+            this.chart.destroy();
+        }
+
+        this.chart = new Chart(this.context, {
             type: 'bar',
             data: {
-                labels: SpectrumChart.LABELS_X_AXES,
+                labels: xAxis,
                 datasets: [{
                     label: 'Number of pixel',
                     data: data,
@@ -100,6 +112,5 @@ export class SpectrumChart extends Canvas {
                 }
             }
         } as any);
-        console.log(myChart.chartArea.left, myChart.chartArea.right, myChart.chartArea.right - myChart.chartArea.left)
     }
 }

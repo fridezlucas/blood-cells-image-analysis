@@ -30,12 +30,14 @@ export class Analyser {
     private ddlImages: HTMLSelectElement;
     private sliderGrayscaleLimitMin: HTMLInputElement;
     private sliderGrayscaleLimitMax: HTMLInputElement;
+    private sliderLimitGraph: HTMLInputElement;
     private inputFile: HTMLInputElement;
 
     // Options
     private mustApplyGrayscaleLimit: boolean;
     private grayscaleLimitMin: number;
     private grayscaleLimitMax: number;
+    private limitGraph: number;
 
     /**
      * Instanciate a new Analyser
@@ -47,7 +49,7 @@ export class Analyser {
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    public constructor(lstCanvas: CanvasI, idDdlImage: string, idSliderMin: string, idSliderMax: string, idFileInput: string) {
+    public constructor(lstCanvas: CanvasI, idDdlImage: string, idSliderMin: string, idSliderMax: string, idMaxGraph: string, idFileInput: string) {
 
         // Canvas
         this.originalImage = new OriginalImage(lstCanvas.idCanvasOriginal);
@@ -61,12 +63,14 @@ export class Analyser {
         this.ddlImages = <HTMLSelectElement>document.getElementById(idDdlImage);
         this.sliderGrayscaleLimitMin = <HTMLInputElement>document.getElementById(idSliderMin);
         this.sliderGrayscaleLimitMax = <HTMLInputElement>document.getElementById(idSliderMax);
+        this.sliderLimitGraph = <HTMLInputElement>document.getElementById(idMaxGraph);
         this.inputFile = <HTMLInputElement>document.getElementById(idFileInput);
 
         // Options
         this.mustApplyGrayscaleLimit = false;
         this.grayscaleLimitMin = parseInt(this.sliderGrayscaleLimitMin.value);
         this.grayscaleLimitMax = parseInt(this.sliderGrayscaleLimitMax.value);
+        this.limitGraph = parseInt(this.sliderLimitGraph.value);
 
         this.initEvents();
     }
@@ -132,6 +136,16 @@ export class Analyser {
     }
 
     /**
+     * Change grayscale limit to do black white transformation
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
+    private changeLimitGraph = (e: Event) => {
+        this.limitGraph = parseInt((<HTMLInputElement>e.target).value);
+        this.process();
+    }
+
+    /**
      * Init all events according to White blood cells analyser
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
@@ -141,10 +155,14 @@ export class Analyser {
         this.ddlImages.addEventListener("change", this.changeImageDdl);
         this.sliderGrayscaleLimitMin.addEventListener("change", this.changeGrayscaleLimitMin);
         this.sliderGrayscaleLimitMax.addEventListener("change", this.changeGrayscaleLimitMax);
+        this.sliderLimitGraph.addEventListener("change", this.changeLimitGraph);
         this.sliderGrayscaleLimitMin.addEventListener("input", (e: Event) => {
             (<HTMLInputElement>e.target).parentElement.querySelector("span").textContent = (<HTMLInputElement>e.target).value;
         });
         this.sliderGrayscaleLimitMax.addEventListener("input", (e: Event) => {
+            (<HTMLInputElement>e.target).parentElement.querySelector("span").textContent = (<HTMLInputElement>e.target).value;
+        });
+        this.sliderLimitGraph.addEventListener("input", (e: Event) => {
             (<HTMLInputElement>e.target).parentElement.querySelector("span").textContent = (<HTMLInputElement>e.target).value;
         });
     }
@@ -168,7 +186,7 @@ export class Analyser {
     private process = () => {
         let arrayDensity: Array<number> = this.grayscaleImage.drawImage(this.originalImage.getCanvas());
         this.bwImage.drawImage(this.grayscaleImage.getCanvas(), this.grayscaleLimitMin, this.grayscaleLimitMax);
-        this.spectrumChart.drawChart(arrayDensity, this.grayscaleLimitMin, this.grayscaleLimitMax);
+        this.spectrumChart.drawChart(arrayDensity, this.grayscaleLimitMin, this.grayscaleLimitMax, this.limitGraph);
         this.processingChart.drawImage(this.bwImage.getBinaryUnits(), this.bwImage.getCanvas().width, this.bwImage.getCanvas().height);
         console.log("Analyser -> privateprocess -> this.bwImage.getBinaryUnits()", this.bwImage.getBinaryUnits())
     }
