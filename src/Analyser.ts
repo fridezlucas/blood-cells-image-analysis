@@ -34,9 +34,6 @@ export class Analyser {
     private sliderLimitGraph: Slider;
     private inputFile: HTMLInputElement;
 
-    // Options
-    private mustApplyGrayscaleLimit: boolean;
-
     /**
      * Instanciate a new Analyser
      * @param lstCanvas Canvas id list
@@ -63,9 +60,6 @@ export class Analyser {
         this.sliderGrayscaleLimitMax = new Slider(idSliderMax, this.process);
         this.sliderLimitGraph = new Slider(idMaxGraph, this.process);
         this.inputFile = <HTMLInputElement>document.getElementById(idFileInput);
-
-        // Options
-        this.mustApplyGrayscaleLimit = false;
 
         this.initEvents();
     }
@@ -137,9 +131,12 @@ export class Analyser {
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     private process = () => {
+        // Values
         let grayscaleLimitMin: number = this.sliderGrayscaleLimitMin.getValue();
         let grayscaleLimitMax: number = this.sliderGrayscaleLimitMax.getValue();
         let limitGraph: number = this.sliderLimitGraph.getValue();
+
+        // Processing
         let arrayDensity: Array<number> = this.grayscaleImage.drawImage(this.originalImage.getCanvas());
         this.bwImage.drawImage(this.grayscaleImage.getCanvas(), grayscaleLimitMin, grayscaleLimitMax);
         this.spectrumChart.drawChart(arrayDensity, grayscaleLimitMin, grayscaleLimitMax, limitGraph);
