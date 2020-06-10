@@ -17,6 +17,10 @@ export class ProcessingImage extends Canvas {
     private arrayRgbValues: Uint8ClampedArray;
     private arrayBinaryValues: Array<number>;
 
+    private applyErosion: boolean;
+    private applyDilation: boolean;
+    private cellSize: number;
+
     /**
      * Instanciate a new ProcessingImage canvas
      * @param idCanvasChart id concerned canvas
@@ -27,6 +31,12 @@ export class ProcessingImage extends Canvas {
         super(idCanvasChart);
     }
 
+    private getImageProcessingOptions = (): void => {
+        this.applyErosion = (<HTMLInputElement>document.getElementById("cbApplyErosion")).checked;
+        this.applyDilation = (<HTMLInputElement>document.getElementById("cbApplyDilation")).checked;
+        this.cellSize = ~~(<HTMLInputElement>document.getElementById("txtCellSize")).value;
+    }
+
     /**
      * Get binary values [0; 1] from array rgb values [0; 255]
      * 
@@ -35,9 +45,7 @@ export class ProcessingImage extends Canvas {
     public getRGBValues = (bits: Array<number>, width: number, height: number) => {
         let rgbaImage: Uint32Array = new Uint32Array(width * height);
 
-        console.log(rgbaImage.length, bits.length);
-        
-        for(var i=0; i < rgbaImage.length; i++){
+        for (var i = 0; i < rgbaImage.length; i++) {
             rgbaImage[i] = bits[i] == 0 ? 0xffffffff : 0xff000000;
         }
 
@@ -54,12 +62,19 @@ export class ProcessingImage extends Canvas {
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     public drawImage = (bits: Array<number>, width: number, height: number): void => {
+        this.getImageProcessingOptions();
 
         let t = new Morph(width, height, bits);
         this.context.createImageData(width, height);
-        
-        t.dilateWithElement();
-        t.dilateWithElement();
+
+        if (this.applyErosion) {
+            console.log("OK");
+            
+            t.erodeWithElement();
+        }
+        if (this.applyDilation) {
+            t.dilateWithElement();
+        }
 
         this.canvas.width = width;
         this.canvas.height = height;
