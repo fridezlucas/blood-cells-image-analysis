@@ -36,6 +36,11 @@ export class ProcessingImage extends Canvas {
         super(idCanvasChart);
     }
 
+    /**
+     * Get image processing options from html view
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
     private getImageProcessingOptions = (): void => {
         this.applyErosion = (<HTMLInputElement>document.getElementById("cbApplyErosion")).checked;
         this.applyDilation = (<HTMLInputElement>document.getElementById("cbApplyDilation")).checked;
@@ -45,9 +50,11 @@ export class ProcessingImage extends Canvas {
     /**
      * Get binary values [0; 1] from array rgb values [0; 255]
      * 
+     * @return image as RGBA 32 bits pixels
+     * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch> 
      */
-    public getRGBValues = (bits: Array<number>, width: number, height: number) => {
+    public getRGBValues = (bits: Array<number>, width: number, height: number): Uint32Array => {
         let rgbaImage: Uint32Array = new Uint32Array(width * height);
 
         for (var i = 0; i < rgbaImage.length; i++) {
@@ -62,7 +69,7 @@ export class ProcessingImage extends Canvas {
     /**
      * Draw a black and white image from an original source
      * @param canvasImage HTML Canvas tag from which original image is taken
-     * @return Array<number> densityPixel stats according to grayscaled image
+     * @return densityPixel stats according to grayscaled image
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
@@ -79,7 +86,7 @@ export class ProcessingImage extends Canvas {
             t.dilateWithElement();
         }
 
-        
+
         this.canvas.width = width;
         this.canvas.height = height;
         this.getRGBValues(t.data, width, height);

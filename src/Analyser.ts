@@ -147,9 +147,6 @@ export class Analyser {
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     private process = () => {
-        // Values
-        let grayscaleLimitMin: number = this.sliderGrayscaleLimitMin.getValue();
-        let grayscaleLimitMax: number = this.sliderGrayscaleLimitMax.getValue();
         let limitGraph: number = this.sliderLimitGraph.getValue();
 
         // Processing

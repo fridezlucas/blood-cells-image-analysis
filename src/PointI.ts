@@ -6,6 +6,7 @@
  * 
  * @author Lucas Fridez <lucas.fridez@he-arc.ch>
  */
+
 export interface Point {
     x: number;
     y: number;

@@ -39,7 +39,7 @@ export class Slider {
     }
 
     /**
-     * On change method
+     * On change method callback
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
@@ -49,7 +49,7 @@ export class Slider {
     }
 
     /**
-     * On input method
+     * On input method callback
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
@@ -58,7 +58,7 @@ export class Slider {
     }
 
     /**
-     * Get input slider value
+     * @return {number} input slider value
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
@@ -67,7 +67,9 @@ export class Slider {
     }
 
     /**
-     * Set input slider value
+     * Set input slider value and adapt string of Slider
+     * 
+     * @param {number} value to set
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */

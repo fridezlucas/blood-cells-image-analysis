@@ -12,9 +12,12 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/moment": "^2.13.0"
+  },
   "scripts": {
     "build": "webpack",
+    "docs": "typedoc --out docs src --exclude node_modules --ignoreCompilerErrors",
     "start": "webpack-dev-server --mode development"
   },
   "keywords": [],

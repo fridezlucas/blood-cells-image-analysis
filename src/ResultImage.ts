@@ -35,10 +35,10 @@ export class ResultImage extends Canvas {
     }
 
     private getImageProcessingOptions = (): void => {
-        this.cellSize = ~~(<HTMLInputElement>document.getElementById("txtCellSize")).value;
+        this.cellSize = parseInt((<HTMLInputElement>document.getElementById("txtCellSize")).value);
     }
 
-    private makeCircle = (width): Set<Point> /*Array<Array<number>>*/ => {
+    private makeCircle = (width: number): Set<Point> => {
         let x = width / 2;
         let y = width / 2;
         let r = width / 2;

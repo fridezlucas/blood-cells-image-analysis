@@ -37,7 +37,7 @@ export abstract class Canvas {
     }
 
     /**
-     * @return HTML Canvas element
+     * @return {HTMLCanvasElement} HTML Canvas element
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
@@ -46,7 +46,7 @@ export abstract class Canvas {
     }
 
     /**
-     * @return Context 2d of canvas
+     * @return {CanvasRenderingContext2D} Context 2d of canvas
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
@@ -56,12 +56,14 @@ export abstract class Canvas {
 
     /**
      * Get scaled dimensions of canvas
+     * 
      * @param imgWidth width of image
      * @param imgHeight height of image
      * 
+     * @return {ratio, width, height} aspect ratio
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    public getScaledDim = (imgWidth: number, imgHeight: number): { ratio: number, width: number, height: number } => {
+    public getScaledDimensions = (imgWidth: number, imgHeight: number): { ratio: number, width: number, height: number } => {
         let scaled = {
             ratio: imgWidth / imgHeight,
             width: imgWidth,
@@ -93,10 +95,12 @@ export abstract class Canvas {
     /**
      * Adapt canvas' appearance (width/height) according to image
      * 
+     * @param {HTMLImageElement} image to keep aspect ratio and dimensions
+     * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     public adaptAppearance = (image: HTMLImageElement) => {
-        let scaled: { ratio: number, width: number, height: number } = this.getScaledDim(image.width, image.height);
+        let scaled: { ratio: number, width: number, height: number } = this.getScaledDimensions(image.width, image.height);
         this.context.canvas.width = scaled.width;
         this.context.canvas.height = scaled.height;
     }

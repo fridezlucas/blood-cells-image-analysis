@@ -12,7 +12,7 @@ import { Canvas } from "./Canvas";
 import { Chart } from 'chart.js';
 import { Slider } from "./Slider";
 
-interface Point {
+interface PointLine {
     index: number;
     text: string;
 }
@@ -23,7 +23,7 @@ const verticalLinePlugin = {
         const data = meta.data;
         return data[pointIndex]._model.x;
     },
-    renderVerticalLine: function (chartInstance, pointIndex: Point) {
+    renderVerticalLine: function (chartInstance, pointIndex: PointLine) {
         const lineLeftOffset = this.getLinePosition(chartInstance, pointIndex.index);
         const scale = chartInstance.scales['y-axis-0'];
         const context = chartInstance.chart.ctx;
@@ -131,9 +131,13 @@ export class SpectrumChart extends Canvas {
         while (data.length > limit + 1) {
             data.pop();
         }
+
+        // Destroy previous chart (avoid unexpected behaviour on hover)
         if (this.chart != null) {
             this.chart.destroy();
         }
+
+        // Draw chart with 2 vertical lines (min and max threshold)
         this.chart = new Chart(this.context, {
             type: 'bar',
             data: {
