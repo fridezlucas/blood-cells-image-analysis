@@ -3,20 +3,21 @@
  * 
  * @project AN2020 - Traitement d'images pour nombre de globules blancs
  * @date 2020.06.18
+ * @version 2020.06.18
  * 
  * @author Lucas Fridez <lucas.fridez@he-arc.ch>
  */
 
 // Imports
-import { SpectrumChart } from "./SpectrumChart";
-import CanvasI from "./CanvasI";
-import { Canvas } from "./Canvas";
-import { OriginalImage } from "./OriginalImage";
-import { GrayscaleImage } from "./GrayscaleImage";
-import { BlackWhiteImage } from "./BlackWhiteImage";
-import { ProcessingImage } from "./ProcessingImage";
-import { Slider } from "./Slider";
-import { ResultImage } from "./ResultImage";
+import { SpectrumChart } from "./canvas/SpectrumChart";
+import { CanvasI } from "./interfaces/CanvasI";
+import { Canvas } from "./canvas/Canvas";
+import { OriginalImage } from "./canvas/OriginalImage";
+import { GrayscaleImage } from "./canvas/GrayscaleImage";
+import { BlackWhiteImage } from "./canvas/BlackWhiteImage";
+import { ProcessingImage } from "./canvas/ProcessingImage";
+import { Slider } from "./components/Slider";
+import { ResultImage } from "./canvas/ResultImage";
 
 /**
  * Analyser class
