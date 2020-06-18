@@ -61,7 +61,7 @@ export abstract class Canvas {
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    public getScaledDim = (imgWidth: any, imgHeight: any): any => {
+    public getScaledDim = (imgWidth: number, imgHeight: number): {ratio: number, width: number, height: number} => {
         let scaled = {
             ratio: imgWidth / imgHeight,
             width: imgWidth,
