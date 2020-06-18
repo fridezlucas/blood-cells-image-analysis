@@ -26,6 +26,7 @@ import { ResultImage } from "./ResultImage";
  */
 export class Analyser {
 
+    // Canvas properties
     private originalImage: OriginalImage;
     private grayscaleImage: GrayscaleImage;
     private bwImage: BlackWhiteImage;
@@ -33,6 +34,7 @@ export class Analyser {
     private processingImage: ProcessingImage;
     private resultImage: ResultImage;
 
+    // Option properties
     private ddlImages: HTMLSelectElement;
     private sliderGrayscaleLimitMin: Slider;
     private sliderGrayscaleLimitMax: Slider;
@@ -105,6 +107,7 @@ export class Analyser {
         var reader = new FileReader();
         var file = (<HTMLInputElement>e.target).files[0];
 
+        // Analyse image when fully loaded
         reader.onloadend = () => {
             this.analyse(reader.result);
         }
@@ -114,6 +117,7 @@ export class Analyser {
 
     /**
      * Init all events according to White blood cells analyser
+     * On image input (or change with dropdown list) : analyze it !
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
@@ -143,9 +147,6 @@ export class Analyser {
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     private process = () => {
-        // Values
-        let grayscaleLimitMin: number = this.sliderGrayscaleLimitMin.getValue();
-        let grayscaleLimitMax: number = this.sliderGrayscaleLimitMax.getValue();
         let limitGraph: number = this.sliderLimitGraph.getValue();
 
         // Processing
