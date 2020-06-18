@@ -13,6 +13,7 @@ import { GrayscaleImage } from "./GrayscaleImage";
 import { BlackWhiteImage } from "./BlackWhiteImage";
 import { ProcessingImage } from "./ProcessingImage";
 import { Slider } from "./Slider";
+import { ResultCanvas } from "./ResultCanvas";
 
 /**
  * Analyser class
@@ -27,6 +28,7 @@ export class Analyser {
     private bwImage: BlackWhiteImage;
     private spectrumChart: SpectrumChart;
     private processingChart: ProcessingImage;
+    private resultCanvas: ResultCanvas;
 
     private ddlImages: HTMLSelectElement;
     private sliderGrayscaleLimitMin: Slider;
@@ -40,6 +42,7 @@ export class Analyser {
      * @param idDdlImage select id
      * @param idSliderMin sliderMin id
      * @param idSliderMax sliderMax id
+     * @param idMaxGraph sliderMaxWhite id
      * @param idFileInput file input id
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
@@ -52,7 +55,7 @@ export class Analyser {
         this.bwImage = new BlackWhiteImage(lstCanvas.idCanvasBW)
         this.spectrumChart = new SpectrumChart(lstCanvas.idCanvasChart);
         this.processingChart = new ProcessingImage(lstCanvas.idCanvasProcessing);
-        // canvasresult
+        this.resultCanvas = new ResultCanvas(lstCanvas.idCanvasResult);
 
         // Interactable components
         this.ddlImages = <HTMLSelectElement>document.getElementById(idDdlImage);
@@ -77,6 +80,8 @@ export class Analyser {
 
     /**
      * Change image to analyse with included images in HTML
+     * 
+     * @param e Change event with dropdown list
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
@@ -112,10 +117,14 @@ export class Analyser {
     private initEvents = (): void => {
         this.inputFile.addEventListener('change', this.changeImageFileInput, false);
         this.ddlImages.addEventListener("change", this.changeImageDdl);
+
+        (<HTMLInputElement>document.getElementById("txtCellSize")).addEventListener("change", this.process);
     }
 
     /**
-     * Analyse image
+     * Analyse image (when User changes image)
+     * 
+     * @param buffer Original image to draw and analyse
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
@@ -126,7 +135,7 @@ export class Analyser {
     }
 
     /**
-     * Process image
+     * Process image (when User change options)
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
@@ -138,8 +147,9 @@ export class Analyser {
 
         // Processing
         let arrayDensity: Array<number> = this.grayscaleImage.drawImage(this.originalImage.getCanvas());
-        this.bwImage.drawImage(this.grayscaleImage.getCanvas(), grayscaleLimitMin, grayscaleLimitMax);
-        this.spectrumChart.drawChart(arrayDensity, grayscaleLimitMin, grayscaleLimitMax, limitGraph);
+        this.spectrumChart.drawChart(arrayDensity, this.sliderGrayscaleLimitMin, this.sliderGrayscaleLimitMax, limitGraph);
+        this.bwImage.drawImage(this.grayscaleImage.getCanvas(), this.sliderGrayscaleLimitMin, this.sliderGrayscaleLimitMax);
         this.processingChart.drawImage(this.bwImage.getBinaryUnits(), this.bwImage.getCanvas().width, this.bwImage.getCanvas().height);
+        this.resultCanvas.drawImage(this.bwImage.getBinaryUnits(),this.bwImage.getCanvas().width, this.bwImage.getCanvas().height, this.originalImage.getOriginalImage());
     }
 }

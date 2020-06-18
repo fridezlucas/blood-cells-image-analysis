@@ -71,5 +71,6 @@ export class Slider {
     public setValue = (v: number) : void => {
         this.value = v;
         this.inputElement.value = v.toString();
+        this.valueElement.innerText = v.toString();
     }
 }

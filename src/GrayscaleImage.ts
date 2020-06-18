@@ -39,11 +39,13 @@ export class GrayscaleImage extends Canvas {
         //Common formula for converting to grayscale.
         //gray = 0.3*R + 0.59*G + 0.11*B
 
-        var density: any = [];
+        // Create density array
+        var density: Array<number> = new Array<number>();
         for (let i = 0; i < 256; i++) {
             density[i] = 0;
         }
 
+        // Fill density array
         for (var i = arraylength - 1; i > 0; i -= 4) {
             var gray = 0.3 * data[i - 3] + 0.59 * data[i - 2] + 0.11 * data[i - 1];
 

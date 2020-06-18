@@ -7,6 +7,7 @@
 // Imports
 import { Canvas } from "./Canvas";
 import { Chart } from 'chart.js';
+import { Slider } from "./Slider";
 
 interface Point {
     index: number;
@@ -69,23 +70,67 @@ export class SpectrumChart extends Canvas {
         this.arrayDensityPixels = new Array<number>();
     }
 
+    private findThresholdPeak = (data: Array<number>, limit: number): number => {
+
+        let max: number = 0;
+        let index: number = 0;
+
+        for (let i = 0; i < data.length; ++i) {
+            if (i < limit && data[i] > max) {
+                max = data[i];
+                index = i;
+            }
+        }
+
+        return index;
+    }
+
+    private findThresholdMin = (data: Array<number>): number => {
+        let minIndex: number = 0;
+        let isMinDefined: boolean = false;
+
+        // Find first value greater than 0
+        for (let d = 1; d < data.length; d++) {
+            if (data[d] > 0 && !isMinDefined) {
+                return d;
+            }
+        }
+    }
+
+    private findThreshold = (data: Array<number>, limit: number): { min: number, max: number } => {
+        // Find min and max threshold values
+        let minIndex: number = this.findThresholdMin(data);
+        let peakIndex: number = this.findThresholdPeak(data, limit);
+        let interval: number = peakIndex - minIndex;
+        let maxIndex: number = peakIndex + interval > limit ? limit : peakIndex + interval;
+
+        return { min: minIndex, max: maxIndex };
+    }
+
     /**
      * Draw Spectrum Chart
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    public drawChart = (data: Array<number>, min: number, max: number, limit: number): void => {
+    public drawChart = (data: Array<number>, minInput: Slider, maxInput: Slider, limit: number): void => {
+
+        // Find thresholh and adapt sliders
+        let threshold: { min: number, max: number } = this.findThreshold(data, limit);
+        minInput.setValue(threshold.min);
+        maxInput.setValue(threshold.max);
+
         let xAxis: Array<number> = [...Array(limit + 1).keys()];
 
-        data = data
-        while(data.length > limit) {
+        this.updateChart(data, limit, xAxis, threshold);
+    }
+
+    private updateChart = (data: number[], limit: number, xAxis: number[], threshold: { min: number; max: number; }) => {
+        while (data.length > limit + 1) {
             data.pop();
         }
-
-        if(this.chart != null) {
+        if (this.chart != null) {
             this.chart.destroy();
         }
-
         this.chart = new Chart(this.context, {
             type: 'bar',
             data: {
@@ -96,7 +141,7 @@ export class SpectrumChart extends Canvas {
                     borderWidth: 1
                 }]
             },
-            lineAtIndex: [{ text: "Min", index: min }, { text: "Max", index: max }],
+            lineAtIndex: [{ text: "Min", index: threshold.min }, { text: "Max", index: threshold.max }],
             options: {
                 scales: {
                     yAxes: [{

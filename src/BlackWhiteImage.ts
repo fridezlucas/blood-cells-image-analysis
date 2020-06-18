@@ -4,6 +4,7 @@
 
 // Imports
 import { Canvas } from "./Canvas";
+import { Slider } from "./Slider";
 
 /**
  * BlackWhiteImage class to define a canvas drawing a grayscale image
@@ -51,13 +52,16 @@ export class BlackWhiteImage extends Canvas {
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    public drawImage = (canvasImage: HTMLCanvasElement, limitMin: number, limitMax: number): void => {
+    public drawImage = (canvasImage: HTMLCanvasElement, sliderLimitMin: Slider, sliderLimitMax: Slider): void => {
         var inputContext = canvasImage.getContext("2d");
         var imageData = inputContext.getImageData(0, 0, canvasImage.width, canvasImage.height);
         var data = imageData.data;
 
         var arraylength = canvasImage.width * canvasImage.height * 4;
 
+        let limitMin: number = sliderLimitMin.getValue();
+        let limitMax: number = sliderLimitMax.getValue();
+        
         for (var i = arraylength - 1; i > 0; i -= 4) {
             let gray: number = 0;
 

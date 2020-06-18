@@ -22,6 +22,10 @@ export class OriginalImage extends Canvas {
         super(idCanvasChart);
     }
 
+    public getOriginalImage = () : ImageData => {
+        return this.context.getImageData(0, 0, this.canvas.width, this.canvas.height);
+    }
+
     /**
      * Draw an image in a canvas
      * @param buffer buffer image source
