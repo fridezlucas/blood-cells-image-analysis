@@ -35,9 +35,11 @@ export class BlackWhiteImage extends Canvas {
     /**
      * Get binary values [0; 1] from array rgb values [0; 255]
      * 
+     * @return {Array<number>} binary image array
+     * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch> 
      */
-    public getBinaryUnits = () => {
+    public getBinaryUnits = (): Array<number> => {
         this.arrayBinaryValues = new Array<number>();
 
         for (let i = 0; i < this.arrayRgbValues.length; i++) {
