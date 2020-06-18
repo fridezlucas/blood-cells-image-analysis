@@ -51,7 +51,7 @@ export class ResultImage extends Canvas {
      * 
      * @return set of points that forms the circle
      */
-    private makeCircle = (width: number): Set<Point> => {
+    private makeCircleWindow = (width: number): Set<Point> => {
         let x = width / 2;
         let y = width / 2;
         let r = width / 2;
@@ -116,6 +116,90 @@ export class ResultImage extends Canvas {
     }
 
     /**
+     * Mark all cells on canvas with a 'x' character
+     * 
+     * @param arrayCircles array of cells center points
+     * @param cellsCounter number of cells
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
+    private markCellsOnCanvas = (arrayCircles: Point[], cellsCounter: number): void => {
+        this.context.fillStyle = "red";
+        arrayCircles.forEach((c: Point) => {
+            this.context.fillText("x", c.x + (this.cellSize / 2), c.y + (this.cellSize / 2), 20);
+        });
+        (<HTMLSpanElement>document.getElementById("numberWhiteBloodCells")).textContent = cellsCounter.toString();
+    }
+
+    /**
+     * 
+     * @param circle Set of point to check for each window detection
+     * @param row current row to check in image
+     * @param height image height
+     * @param col current col to check in image
+     * @param width image width
+     * @param image image in a 2D representation
+     * 
+     * @return number of correct pixels for circle window
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
+    private countCorrectPixelsForWindow = (circle: Set<Point>, row: number, height: number, col: number, width: number, image: number[][]) : number => {
+        let correctPixels: number = 0;
+        for (let pointCircle of circle.values()) {
+            if (pointCircle.x + row < height && pointCircle.y + col < width) {
+                if (image[pointCircle.x + row][pointCircle.y + col] == 1) {
+                    correctPixels++;
+                }
+            }
+        }
+        return correctPixels;
+    }
+
+    /**
+     * Detect cells and mark them on image
+     * 
+     * @param width image width
+     * @param height image height
+     * @param circle set of point to check for each window detection
+     * @param image binary image in a 2D representation to analyse
+     * @param arrayCircles array of center cells detected
+     * @param cellsCounter counter of detected cells
+     * 
+     * @return number of detected cells
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
+    private detectCells = (width: number, height: number, circle: Set<Point>, image: number[][], arrayCircles: Point[], cellsCounter: number) : number => {
+        // Iterate through each pixel to detect a circle
+        for (let i = 0; i < width; i++) {
+            for (let j = 0; j < height; j++) {
+
+                // Check if circle
+                let correctPixels: number = this.countCorrectPixelsForWindow(circle, j, height, i, width, image);
+
+                if (correctPixels > circle.size * ResultImage.RATIO_DETECTION) {
+                    // Check if cell is already detected
+                    let containsCircle: boolean = arrayCircles.some((c: {
+                        x: number;
+                        y: number;
+                    }) => {
+                        return Math.abs(c.x - i) < this.cellSize && Math.abs(c.y - j) < this.cellSize;
+                    });
+
+                    // If cell is not detected : store it in array and move window detection by cellSize on the right
+                    if (!containsCircle) {
+                        arrayCircles.push({ x: i, y: j });
+                        cellsCounter++;
+                        j += this.cellSize;
+                    }
+                }
+            }
+        }
+        return cellsCounter;
+    }
+
+    /**
      * Draw a black and white image from an original source
      * @param canvasImage HTML Canvas tag from which original image is taken
      * @return Array<number> densityPixel stats according to grayscaled image
@@ -123,53 +207,22 @@ export class ResultImage extends Canvas {
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     public drawImage = (bits: Array<number>, width: number, height: number, originalImage: ImageData): void => {
+        // Prepare canvas and get settings from UI
         this.getImageProcessingOptions();
-        let circle = this.makeCircle(this.cellSize);
-
         this.canvas.width = width;
         this.canvas.height = height;
-
-        let image = this.Get1DTo2DArray(bits, width, height);
-        let ctn = 0;
-
-        let arrayCircles = new Array<Point>();
-
         this.context.putImageData(originalImage, 0, 0);
 
-        for (let i = 0; i < width; i++) {
-            for (let j = 0; j < height; j++) {
+        // Prepare circle matrix
+        let circle = this.makeCircleWindow(this.cellSize);
 
-                // Check if circle
-                let pixel = 0;
-                for (let pointCircle of circle.values()) {
-                    if (pointCircle.x + j < height && pointCircle.y + i < width) {
-                        if (image[pointCircle.x + j][pointCircle.y + i] == 1) {
-                            pixel++;
-                        }
-                    }
-                }
+        // Prepare analyze on ResultImage
+        let image = this.Get1DTo2DArray(bits, width, height);
+        let cellsCounter = 0;
+        let arrayCircles = new Array<Point>();
 
-                if (pixel > circle.size * ResultImage.RATIO_DETECTION) {
+        cellsCounter = this.detectCells(width, height, circle, image, arrayCircles, cellsCounter);
 
-                    let containsCircle: boolean = arrayCircles.some((c : {x: number, y: number}) => {
-                        return Math.abs(c.x - i) < this.cellSize && Math.abs(c.y - j) < this.cellSize;
-                    });
-
-                    if(!containsCircle) {
-                        arrayCircles.push({x: i, y: j});
-                        ctn++;
-                        j += this.cellSize;
-                        console.log(`Circle detected on (${i + this.cellSize / 2},${j + this.cellSize / 2})`);
-                    }
-                }
-            }
-        }
-
-        this.context.fillStyle = "red";
-        arrayCircles.forEach((c: Point) => {
-            this.context.fillText("x", c.x + (this.cellSize / 2), c.y + (this.cellSize / 2), 20);
-        });
-
-        (<HTMLSpanElement>document.getElementById("numberWhiteBloodCells")).textContent = ctn.toString();
+        this.markCellsOnCanvas(arrayCircles, cellsCounter);
     }
 }
