@@ -35,7 +35,7 @@ export class BlackWhiteImage extends Canvas {
     /**
      * Get binary values [0; 1] from array rgb values [0; 255]
      * 
-     * @return {Array<number>} binary image array
+     * @return binary image array
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch> 
      */
@@ -55,7 +55,7 @@ export class BlackWhiteImage extends Canvas {
     /**
      * Draw a black and white image from an original source
      * @param canvasImage HTML Canvas tag from which original image is taken
-     * @return Array<number> densityPixel stats according to grayscaled image
+     * @return densityPixel stats according to grayscaled image
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */

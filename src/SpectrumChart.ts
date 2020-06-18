@@ -73,6 +73,16 @@ export class SpectrumChart extends Canvas {
         this.arrayDensityPixels = new Array<number>();
     }
 
+    /**
+     * Find Threshold peak according to black limit option (set by user)
+     * 
+     * @param data density array of image pixels
+     * @param limit black limit for threshold
+     * 
+     * @return index of peak value [0; 255]
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
     private findThresholdPeak = (data: Array<number>, limit: number): number => {
 
         let max: number = 0;
@@ -88,6 +98,15 @@ export class SpectrumChart extends Canvas {
         return index;
     }
 
+    /**
+     * Find Threshold minimum
+     * 
+     * @param data density array of image pixels
+     * 
+     * @return index of minimum value to keep for black value
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
     private findThresholdMin = (data: Array<number>): number => {
         let minIndex: number = 0;
         let isMinDefined: boolean = false;
@@ -100,6 +119,16 @@ export class SpectrumChart extends Canvas {
         }
     }
 
+    /**
+     * Find threshold min and max values
+     * 
+     * @param data density array of image pixels
+     * @param limit black limit for threshold
+     * 
+     * @return min and max values for threshold
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
     private findThreshold = (data: Array<number>, limit: number): { min: number, max: number } => {
         // Find min and max threshold values
         let minIndex: number = this.findThresholdMin(data);
@@ -112,6 +141,11 @@ export class SpectrumChart extends Canvas {
 
     /**
      * Draw Spectrum Chart
+     * 
+     * @param data density array of image pixels
+     * @param minInput Slider for minInput threshold (user option)
+     * @param maxInput Slider for maxInput threshold (user option)
+     * @limit black limit for threshold
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
@@ -127,7 +161,17 @@ export class SpectrumChart extends Canvas {
         this.updateChart(data, limit, xAxis, threshold);
     }
 
-    private updateChart = (data: number[], limit: number, xAxis: number[], threshold: { min: number; max: number; }) => {
+    /**
+     * Update Chart
+     * 
+     * @param data density array of image pixels
+     * @param limit black limit for threshold
+     * @param xAxis value for xAxis to draw
+     * @param threshold min and max values to draw vertical lines
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
+    private updateChart = (data: number[], limit: number, xAxis: number[], threshold: { min: number; max: number; }): void => {
         while (data.length > limit + 1) {
             data.pop();
         }

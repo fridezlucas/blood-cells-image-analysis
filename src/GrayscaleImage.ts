@@ -30,7 +30,7 @@ export class GrayscaleImage extends Canvas {
     /**
      * Draw a grayscaled image from an original source
      * @param canvasImage HTML Canvas tag from which original image is taken
-     * @return {Array<number>} densityPixel stats according to grayscaled image
+     * @return densityPixel stats according to grayscaled image
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */

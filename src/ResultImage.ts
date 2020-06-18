@@ -34,10 +34,22 @@ export class ResultImage extends Canvas {
         super(idCanvasChart);
     }
 
+    /**
+     * Get image processing option from User view
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
     private getImageProcessingOptions = (): void => {
         this.cellSize = parseInt((<HTMLInputElement>document.getElementById("txtCellSize")).value);
     }
 
+    /**
+     * Make a circle matrix
+     * 
+     * @param width width of square matrix containing circle
+     * 
+     * @return set of points that forms the circle
+     */
     private makeCircle = (width: number): Set<Point> => {
         let x = width / 2;
         let y = width / 2;
@@ -69,7 +81,19 @@ export class ResultImage extends Canvas {
         return set;
     }
 
-    private oneD2TwoD = (bits: Array<number>, width: number, height: number): Array<Array<number>> => {
+    /**
+     * Transform a 1 dimension array image into a 2 dimensions array image
+     * It is much easier to work with a 2d array image
+     * 
+     * @param bits binary image as a 1D array
+     * @param width width of image
+     * @param height height of image
+     * 
+     * @return Image in a 2D array representation
+     * 
+     * @author Lucas Fridez <lucas.fridez@he-arc.ch>
+     */
+    private Get1DTo2DArray = (bits: Array<number>, width: number, height: number): Array<Array<number>> => {
 
         let image2D = new Array(height);
 
@@ -102,7 +126,7 @@ export class ResultImage extends Canvas {
         this.canvas.width = width;
         this.canvas.height = height;
 
-        let image = this.oneD2TwoD(bits, width, height);
+        let image = this.Get1DTo2DArray(bits, width, height);
         let ctn = 0;
 
         let arrayCircles = new Array<Point>();

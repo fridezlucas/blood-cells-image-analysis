@@ -26,7 +26,7 @@ export class OriginalImage extends Canvas {
     }
 
     /**
-     * @return {ImageData} OriginalImage
+     * @return OriginalImage
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
@@ -38,7 +38,7 @@ export class OriginalImage extends Canvas {
      * Draw an image in a canvas
      * @param buffer buffer image source
      * 
-     * @return {Promise} promise to wait until parallel drawing is finished to continue analyze
+     * @return Promise to wait until parallel drawing is finished to continue analyze
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */

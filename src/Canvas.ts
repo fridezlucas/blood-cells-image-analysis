@@ -60,7 +60,7 @@ export abstract class Canvas {
      * @param imgWidth width of image
      * @param imgHeight height of image
      * 
-     * @return {ratio, width, height} aspect ratio
+     * @return aspect ratio object `{ratio, width, height}`
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     public getScaledDimensions = (imgWidth: number, imgHeight: number): { ratio: number, width: number, height: number } => {

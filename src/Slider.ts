@@ -69,7 +69,7 @@ export class Slider {
     /**
      * Set input slider value and adapt string of Slider
      * 
-     * @param {number} value to set
+     * @param value to set
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
