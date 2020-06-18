@@ -1,6 +1,9 @@
 /**
  * Image Analyser class
  * 
+ * @project AN2020 - Traitement d'images pour nombre de globules blancs
+ * @date 2020.06.18
+ * 
  * @author Lucas Fridez <lucas.fridez@he-arc.ch>
  */
 
@@ -13,7 +16,7 @@ import { GrayscaleImage } from "./GrayscaleImage";
 import { BlackWhiteImage } from "./BlackWhiteImage";
 import { ProcessingImage } from "./ProcessingImage";
 import { Slider } from "./Slider";
-import { ResultCanvas } from "./ResultCanvas";
+import { ResultImage } from "./ResultImage";
 
 /**
  * Analyser class
@@ -27,8 +30,8 @@ export class Analyser {
     private grayscaleImage: GrayscaleImage;
     private bwImage: BlackWhiteImage;
     private spectrumChart: SpectrumChart;
-    private processingChart: ProcessingImage;
-    private resultCanvas: ResultCanvas;
+    private processingImage: ProcessingImage;
+    private resultImage: ResultImage;
 
     private ddlImages: HTMLSelectElement;
     private sliderGrayscaleLimitMin: Slider;
@@ -54,8 +57,8 @@ export class Analyser {
         this.grayscaleImage = new GrayscaleImage(lstCanvas.idCanvasGray);
         this.bwImage = new BlackWhiteImage(lstCanvas.idCanvasBW)
         this.spectrumChart = new SpectrumChart(lstCanvas.idCanvasChart);
-        this.processingChart = new ProcessingImage(lstCanvas.idCanvasProcessing);
-        this.resultCanvas = new ResultCanvas(lstCanvas.idCanvasResult);
+        this.processingImage = new ProcessingImage(lstCanvas.idCanvasProcessing);
+        this.resultImage = new ResultImage(lstCanvas.idCanvasResult);
 
         // Interactable components
         this.ddlImages = <HTMLSelectElement>document.getElementById(idDdlImage);
@@ -73,7 +76,7 @@ export class Analyser {
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     private clearAllCanvas = () => {
-        [this.originalImage, this.grayscaleImage, this.spectrumChart, this.processingChart].map((canvas: Canvas) => {
+        [this.originalImage, this.grayscaleImage, this.spectrumChart, this.processingImage, this.resultImage].map((canvas: Canvas) => {
             canvas.clear();
         })
     }
@@ -149,7 +152,7 @@ export class Analyser {
         let arrayDensity: Array<number> = this.grayscaleImage.drawImage(this.originalImage.getCanvas());
         this.spectrumChart.drawChart(arrayDensity, this.sliderGrayscaleLimitMin, this.sliderGrayscaleLimitMax, limitGraph);
         this.bwImage.drawImage(this.grayscaleImage.getCanvas(), this.sliderGrayscaleLimitMin, this.sliderGrayscaleLimitMax);
-        this.processingChart.drawImage(this.bwImage.getBinaryUnits(), this.bwImage.getCanvas().width, this.bwImage.getCanvas().height);
-        this.resultCanvas.drawImage(this.bwImage.getBinaryUnits(),this.bwImage.getCanvas().width, this.bwImage.getCanvas().height, this.originalImage.getOriginalImage());
+        this.processingImage.drawImage(this.bwImage.getBinaryUnits(), this.bwImage.getCanvas().width, this.bwImage.getCanvas().height);
+        this.resultImage.drawImage(this.bwImage.getBinaryUnits(),this.bwImage.getCanvas().width, this.bwImage.getCanvas().height, this.originalImage.getOriginalImage());
     }
 }

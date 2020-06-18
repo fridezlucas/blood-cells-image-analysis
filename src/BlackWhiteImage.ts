@@ -1,5 +1,10 @@
 /**
  * BlackWhiteImage class
+ * 
+ * @project AN2020 - Traitement d'images pour nombre de globules blancs
+ * @date 2020.06.18
+ * 
+ * @author Lucas Fridez <lucas.fridez@he-arc.ch>
  */
 
 // Imports
@@ -61,7 +66,7 @@ export class BlackWhiteImage extends Canvas {
 
         let limitMin: number = sliderLimitMin.getValue();
         let limitMax: number = sliderLimitMax.getValue();
-        
+
         for (var i = arraylength - 1; i > 0; i -= 4) {
             let gray: number = 0;
 
