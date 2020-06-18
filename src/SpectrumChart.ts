@@ -12,18 +12,13 @@ import { Canvas } from "./Canvas";
 import { Chart } from 'chart.js';
 import { Slider } from "./Slider";
 
-interface PointLine {
-    index: number;
-    text: string;
-}
-
 const verticalLinePlugin = {
     getLinePosition: function (chart, pointIndex) {
         const meta = chart.getDatasetMeta(0); // first dataset is used to discover X coordinate of a point
         const data = meta.data;
         return data[pointIndex]._model.x;
     },
-    renderVerticalLine: function (chartInstance, pointIndex: PointLine) {
+    renderVerticalLine: function (chartInstance, pointIndex: PointLineI) {
         const lineLeftOffset = this.getLinePosition(chartInstance, pointIndex.index);
         const scale = chartInstance.scales['y-axis-0'];
         const context = chartInstance.chart.ctx;

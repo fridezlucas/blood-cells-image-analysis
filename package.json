@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "docs": "typedoc --out docs src --exclude node_modules --ignoreCompilerErrors",
+    "docs": "typedoc --out docs src --exclude node_modules --ignoreCompilerErrors --mode file",
     "start": "webpack-dev-server --mode development"
   },
   "keywords": [],

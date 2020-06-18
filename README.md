@@ -6,7 +6,7 @@
 |-------------|----------------------------------------------------|
 | Cours       | Algorithmes Numériques 2020                        |
 | Titre       | Traitement d'images pour nombre de globules blancs |
-| Date        | 10 juin 2020                                       |
+| Date        | 19 juin 2020                                       |
 | Auteur      | Lucas Fridez                                       |
 | Enseignants | Stéphane Gobron & Julien Senn                      |
 
@@ -37,15 +37,18 @@ Afin de rendre le mini projet, il faut lancer la commande `tsc` depuis le dossie
 
 L'archive doit contenir :
 - `index.html`
+- `docs`
 - `*.js`
 - `*.ts`
 - `tsconfig.json`
 - `src/*.ts`
+- `README.md`
 
 L'archive se prénomme **AN2020_MiniProjet_FridezLucas.{zip,tar,7z,rar}**
 
 ## Sources
-* Cours de Messieurs Stéphane Gobron et Julien Senn
+
+Voir le fichier `index.html`
 
 ## Auteurs 
 
