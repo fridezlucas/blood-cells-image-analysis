@@ -61,7 +61,7 @@ export abstract class Canvas {
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    public getScaledDim = (imgWidth: number, imgHeight: number): {ratio: number, width: number, height: number} => {
+    public getScaledDim = (imgWidth: number, imgHeight: number): { ratio: number, width: number, height: number } => {
         let scaled = {
             ratio: imgWidth / imgHeight,
             width: imgWidth,
@@ -95,7 +95,9 @@ export abstract class Canvas {
      * 
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
-    public adaptAppearance = () => {
-        // adapt and keep aspect ratio
+    public adaptAppearance = (image: HTMLImageElement) => {
+        let scaled: { ratio: number, width: number, height: number } = this.getScaledDim(image.width, image.height);
+        this.context.canvas.width = scaled.width;
+        this.context.canvas.height = scaled.height;
     }
 }

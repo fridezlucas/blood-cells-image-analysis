@@ -42,7 +42,7 @@ export class GrayscaleImage extends Canvas {
         var arraylength = canvasImage.width * canvasImage.height * 4;
 
         // Create density array filled with 0
-        var density: Array<number> = new Array<number>().fill(0);
+        var density: Array<number> = new Array<number>(256).fill(0);
 
         // Fill density array
         for (var i = arraylength - 1; i > 0; i -= 4) {
