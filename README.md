@@ -33,7 +33,7 @@ Afin de développer ce mini projet, veuillez suivre la procédure suivante :
 6. Afin de développer, un serveur auto rafraîchissant est disponible en tapant la commande `npm start` à la racine du dossier `an-white-blood-cells-images-analysis`.
 
 ### Rendu
-Afin de rendre le mini projet, il faut lancer la commande `tsc` depuis le dossier `an-white-blood-cells-images-analysis`. Cette commande génère les fichiers `*.js` correspondants à tous les fichiers `*.ts`.
+Afin de rendre le mini projet, il faut lancer la commande `webpack` depuis le dossier `an-white-blood-cells-images-analysis`. Cette commande génère les fichiers `*.js` correspondants à tous les fichiers `*.ts`.
 
 L'archive doit contenir :
 - `index.html`
