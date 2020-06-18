@@ -79,7 +79,7 @@ export class Analyser {
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     private clearAllCanvas = () => {
-        [this.originalImage, this.grayscaleImage, this.spectrumChart, this.processingImage, this.resultImage].map((canvas: Canvas) => {
+        [this.originalImage, this.grayscaleImage, this.spectrumChart, this.processingImage, this.resultImage].forEach((canvas: Canvas) => {
             canvas.clear();
         })
     }

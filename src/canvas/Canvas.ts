@@ -31,7 +31,7 @@ export abstract class Canvas {
      */
     public constructor(idCanvas: string) {
         this.canvas = <HTMLCanvasElement>document.getElementById(idCanvas);
-        this.context = <CanvasRenderingContext2D>this.canvas.getContext("2d");
+        this.context = this.canvas.getContext("2d");
 
         this.dataMaxWidth = this.canvas.width;
         this.dataMaxHeight = this.canvas.height;

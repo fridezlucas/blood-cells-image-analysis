@@ -23,7 +23,9 @@ Version : 2020.06.18
     <fieldset>
         <legend>Interactions utilisateurs</legend>
         <p>A noter que la liste déroulante ne fonctionne pas en local pour des raisons d'accès Cross Origine au disque.
-            Elle fonctionne sur le site internet mis à disponition : <a href="https://an.fridez.dev">an.fridez.dev</a>.</p>
+            Elle fonctionne sur le site internet mis à disponition : <a href="https://an.fridez.dev">an.fridez.dev</a>.
+        </p>
+        <p>Si ce mini-projet est utilisé en local; veuillez utiliser le petit formulaire avec les images dans le répertoire <em>img</em>.</p>
         <input type="file" id="fileInput" />
         <select name="" id="selectImage">
             <option value="0" selected disabled>Selectionner une image</option>
@@ -35,17 +37,17 @@ Version : 2020.06.18
         <div>
             <label for="limit">Seuil du gris/blanc [0; 255]</label>
             <div>
-                <i>Minimum :</i>
+                <em>Minimum :</em>
                 <input type="range" name="limitMin" id="limitMin" min="0" max="255" value="180">
                 <span>180</span>
             </div>
             <div>
-                <i>Maximum :</i>
+                <em>Maximum :</em>
                 <input type="range" name="limitMax" id="limitMax" min="0" max="255" value="220">
                 <span>220</span>
             </div>
             <div>
-                <i>Maximum pour graph :</i>
+                <em>Maximum pour graph :</em>
                 <input type="range" name="maxBlack" id="maxBlack" min="0" max="255" value="240">
                 <span>240</span>
             </div>
@@ -120,11 +122,15 @@ Version : 2020.06.18
         <li>Transformer l'image en niveau de gris</li>
         <li>Dessiner un graphique du spectre d'intensité de l'image en niveaux de gris [0; 255]</li>
         <li>Créer une image en noir et blanc (binaire {0; 1})</li>
-        <li>Effectuer un <i>Image Processing</i></li>
+        <li>Effectuer un <em>Image Processing</em></li>
         <li>Entourer les globules trouvés</li>
     </ol>
 
     <h2>Résultats</h2>
+
+    <h3>Code source</h3>
+    <p>Le mini projet est scanné à l'aide d'un outil de qualité de code source. Les résultats sont les suivants :</p>
+    <img src="img/sonarscan.png" alt="Sonarscan">
 
     <h2>Conclusion</h2>
 

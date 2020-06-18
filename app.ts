@@ -15,7 +15,7 @@ import { Analyser } from './src/Analyser';
  */
 document.addEventListener("DOMContentLoaded", () => {
 
-    let WhiteBloodAnalyser: Analyser = new Analyser({
+    new Analyser({
         idCanvasOriginal: "canvas",
         idCanvasGray: "canvas-gray",
         idCanvasBW: "canvas2",

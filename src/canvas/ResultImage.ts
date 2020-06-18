@@ -55,7 +55,9 @@ export class ResultImage extends Canvas {
         let x = width / 2;
         let y = width / 2;
         let r = width / 2;
-        let i, angle, x1, y1;
+        let angle: number;
+        let x1: number;
+        let y1: number;
 
         let matrix = new Array(width + 1).fill(1);
 
@@ -65,7 +67,7 @@ export class ResultImage extends Canvas {
             matrix[i] = new Array(width + 1).fill(1);
         }
 
-        for (i = 0; i < 360; i += 1) {
+        for (let i = 0; i < 360; i += 1) {
             angle = i;
             x1 = r * Math.cos(angle * Math.PI / 180);
             y1 = r * Math.sin(angle * Math.PI / 180);
@@ -149,8 +151,8 @@ export class ResultImage extends Canvas {
 
                 if (pixel > circle.size * ResultImage.RATIO_DETECTION) {
 
-                    let containsCircle: boolean = arrayCircles.some((circle : {x: number, y: number}) => {
-                        return Math.abs(circle.x - i) < this.cellSize && Math.abs(circle.y - j) < this.cellSize;
+                    let containsCircle: boolean = arrayCircles.some((c : {x: number, y: number}) => {
+                        return Math.abs(c.x - i) < this.cellSize && Math.abs(c.y - j) < this.cellSize;
                     });
 
                     if(!containsCircle) {
@@ -164,8 +166,8 @@ export class ResultImage extends Canvas {
         }
 
         this.context.fillStyle = "red";
-        arrayCircles.forEach((circle: Point) => {
-            this.context.fillText("x", circle.x + (this.cellSize / 2), circle.y + (this.cellSize / 2), 20);
+        arrayCircles.forEach((c: Point) => {
+            this.context.fillText("x", c.x + (this.cellSize / 2), c.y + (this.cellSize / 2), 20);
         });
 
         (<HTMLSpanElement>document.getElementById("numberWhiteBloodCells")).textContent = ctn.toString();
