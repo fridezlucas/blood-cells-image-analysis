@@ -2,8 +2,8 @@
  * ResultImage class
  * 
  * @project AN2020 - Traitement d'images pour nombre de globules blancs
- * @date 2020.06.18
- * @version 2020.06.18
+ * @date 2020.06.20
+ * @version 2020.06.20
  * 
  * @author Lucas Fridez <lucas.fridez@he-arc.ch>
  */
@@ -148,6 +148,8 @@ export class ResultImage extends Canvas {
         let correctPixels: number = 0;
         for (let pointCircle of circle.values()) {
             if (pointCircle.x + row < height && pointCircle.y + col < width) {
+                // Must equals 1 and not 0 because the image processing works with white pixels for shapes
+                // The values are inverted when Image processing is done (0 => 1; 1 => 0)
                 if (image[pointCircle.x + row][pointCircle.y + col] == 1) {
                     correctPixels++;
                 }
@@ -178,6 +180,7 @@ export class ResultImage extends Canvas {
                 // Check if circle
                 let correctPixels: number = this.countCorrectPixelsForWindow(circle, j, height, i, width, image);
 
+                // If pixels are <RATIO_DETECTION>% same with circle matrix; it is a cell !
                 if (correctPixels > circle.size * ResultImage.RATIO_DETECTION) {
                     // Check if cell is already detected
                     let containsCircle: boolean = arrayCircles.some((c: {

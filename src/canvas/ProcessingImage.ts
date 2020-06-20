@@ -2,8 +2,8 @@
  * ProcessingImage class
  * 
  * @project AN2020 - Traitement d'images pour nombre de globules blancs
- * @date 2020.06.18
- * @version 2020.06.18
+ * @date 2020.06.20
+ * @version 2020.06.20
  * 
  * @author Lucas Fridez <lucas.fridez@he-arc.ch>
  */
@@ -77,19 +77,26 @@ export class ProcessingImage extends Canvas {
     public drawImage = (bits: Array<number>, width: number, height: number): void => {
         this.getImageProcessingOptions();
 
-        let t = new Morph(width, height, bits);
+        let imageProcessing = new Morph(width, height, bits);
         this.context.createImageData(width, height);
 
-        if (this.applyErosion) {
-            t.erodeWithElement();
+        try {
+            // Avoid 'maximum call stack size exceeded'
+            // Source : https://www.hhutzler.de/blog/avoid-maximum-call-stack-size-exceeded-in-javascript/
+            setTimeout(() => {
+                if (this.applyErosion) {
+                    imageProcessing.erodeWithElement();
+                }
+                if (this.applyDilation) {
+                    imageProcessing.dilateWithElement();
+                }
+            }, 0)
+        } catch (error) {
+            alert(error);
         }
-        if (this.applyDilation) {
-            t.dilateWithElement();
-        }
-
 
         this.canvas.width = width;
         this.canvas.height = height;
-        this.getRGBValues(t.data, width, height);
+        this.getRGBValues(imageProcessing.data, width, height);
     }
 }
