@@ -6,7 +6,7 @@
 |-------------|----------------------------------------------------|
 | Cours       | Algorithmes Numériques 2020                        |
 | Titre       | Traitement d'images pour nombre de globules blancs |
-| Date        | 19 juin 2020                                       |
+| Date        | 20 juin 2020                                       |
 | Auteur      | Lucas Fridez                                       |
 | Enseignant  | Stéphane Gobron                                    |
 

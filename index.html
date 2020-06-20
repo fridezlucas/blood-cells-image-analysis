@@ -110,6 +110,32 @@ Version : 2020.06.20
     </div>
 
     <h2>1. Introduction</h2>
+    <p>Ce présent projet traite d'une détection de cellules au sein d'une image. Le nombre de globules blancs dans le
+        sang est un indice important de santé pour toutes personnes.</p>
+    <p>En effet, un surplus de globules blancs peut indiquer :</p>
+    <ul>
+        <li>infection</li>
+        <li>inflammation</li>
+        <li>blessures</li>
+        <li>etc...</li>
+    </ul>
+
+    <p>Et un manque de globules blancs peut indiquer :</p>
+    <ul>
+        <li>cancer</li>
+        <li>etc...</li>
+    </ul>
+
+    <p>Il est donc important de pouvoir compter précisément le nombre de globules blancs d'une personne au sein d'un
+        échantillon. Cela permet d'estimer correctement le nombre de cellules et de définir si la personne est en bonne
+        santé ou non.</p>
+
+    <p>Pour un être humain, il est facile mais lent de dénombrer des cellules sur une image. Pour un ordinateur, c'est
+        l'inverse. Il ne reconnaît en rien l'apparence d'une cellule. Un bon algorithme permet à un ordinateur de
+        reconnâitre des cellules (formes).
+        Une fois ce dernier implémenté, le dénombrement sera bien plus rapide qu'un humain grâce à la rapidité d'un
+        ordinateur.
+    </p>
 
     <h2>2. Solution proposée</h2>
 
@@ -133,7 +159,7 @@ Version : 2020.06.20
 
     <h4>2.2.1 Calcul du seuil</h4>
     <img src="img/report/seuil.jpg" alt="Calcul seuil">
-    <p>Si i' est plus grand que la valeur de a, on garde a comme valeur maximal. L'intervalle s obtenu permet de
+    <p>Si i' est plus grand que la valeur de a, on garde a comme valeur maximale. L'intervalle s obtenu permet de
         transformer les pixels compris en valeur noir. Les autres seront définis en tant que pixels blanc pour l'image
         binaire.</p>
 
@@ -223,6 +249,13 @@ Version : 2020.06.20
 
     <h2>5. Références</h2>
     <ul>
+        <li>Mayo Clinic Staff, Low white blood cell count, <a target="_blank" rel="noopener noreferrer"
+                href="https://www.mayoclinic.org/symptoms/low-white-blood-cell-count/basics/causes/sym-20050615">www.mayoclinic.org</a>,
+            30 novembre 2018</li>
+        <li>MedicalNewsToday, What to know about high white blood cell count, <a target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.medicalnewstoday.com/articles/315133#high-levels">www.medicalnewstoday.com</a>, 21
+            novembre 2018</li>
         <li>VapidSpace, Converting Images To Grayscale Using The Canvas,
             <a target="_blank" rel="noopener noreferrer"
                 href="http://www.vapidspace.com/coding/2012/02/26/converting-images-to-grayscale-using-the-canvas/">www.vapidspace.com</a>,
@@ -246,7 +279,7 @@ Version : 2020.06.20
     </ul>
 
     <footer>
-        <p>Algorithmes numériques - Mini Projet. Lucas Fridez (19 juin 2020)</p>
+        <p>Algorithmes numériques - Mini Projet. Lucas Fridez (20 juin 2020)</p>
         <p>A destination de Monsieur Stéphane Gobron</p>
     </footer>
 
