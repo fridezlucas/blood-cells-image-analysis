@@ -36,6 +36,7 @@ export class GrayscaleImage extends Canvas {
      * @author Lucas Fridez <lucas.fridez@he-arc.ch>
      */
     public drawImage = (canvasImage: HTMLCanvasElement): Array<number> => {
+
         var inputContext = canvasImage.getContext("2d");
         var imageData = inputContext.getImageData(0, 0, canvasImage.width, canvasImage.height);
         var data = imageData.data;
