@@ -214,6 +214,11 @@ Version : 2020.06.20
     <em>Note : les cellules non trouvées sont plus petites que les autres. L'algorithme implémenté cherche des cellules
         de même taille.</em>
 
+    <p>Pour des images trop grandes (ici l'image 2), il se peut qu'une erreur "RangeError: Maximum call stack size
+        exceeded" soit retournée. Il s'agit de la pile d'appels de méthodes JavaScript qui est limitée. Cela provient
+        des appels récursifs pour l'érosion et la dilatation. Une alerte s'affiche mais le résultat apparaît correct
+        suite à l'Image Processing.</p>
+
     <h3>3.1 Code source</h3>
     <p>Le mini projet est scanné à l'aide d'un outil de qualité de code source. Les résultats sont les suivants :</p>
     <img src="img/report/sonarscan.png" alt="Sonarscan">

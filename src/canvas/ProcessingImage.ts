@@ -81,16 +81,12 @@ export class ProcessingImage extends Canvas {
         this.context.createImageData(width, height);
 
         try {
-            // Avoid 'maximum call stack size exceeded'
-            // Source : https://www.hhutzler.de/blog/avoid-maximum-call-stack-size-exceeded-in-javascript/
-            setTimeout(() => {
-                if (this.applyErosion) {
-                    imageProcessing.erodeWithElement();
-                }
-                if (this.applyDilation) {
-                    imageProcessing.dilateWithElement();
-                }
-            }, 0)
+            if (this.applyErosion) {
+                imageProcessing.erodeWithElement();
+            }
+            if (this.applyDilation) {
+                imageProcessing.dilateWithElement();
+            }
         } catch (error) {
             alert(error);
         }
