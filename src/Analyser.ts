@@ -126,7 +126,8 @@ export class Analyser {
         this.inputFile.addEventListener('change', this.changeImageFileInput, false);
         this.ddlImages.addEventListener("change", this.changeImageDdl);
 
-        (<HTMLInputElement>document.getElementById("txtCellSize")).addEventListener("change", this.process);
+        (<HTMLInputElement>document.getElementById("cbApplyErosion")).addEventListener("change", this.process);
+        (<HTMLInputElement>document.getElementById("cbApplyDilation")).addEventListener("change", this.process);
     }
 
     /**
