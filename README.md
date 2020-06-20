@@ -19,7 +19,7 @@ Ci dessous se trouve les objectifs à atteindre pour ce mini-projet :
 3. Faire un spectre des niveaux de gris
 4. Affichage du spectre + calcul du seuil limite
 5. Technique de détourages (Erosion/Dilatation) pour compter les globules blancs sur l'image
-6. Entourer les globules sur l'image.
+6. Entourer/Démontrer les globules sur l'image.
 
 
 ## Développement
