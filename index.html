@@ -130,7 +130,23 @@ Version : 2020.06.20
             d'Equation</strong>.</p>
 
     <h3>2.2 Modèle développé</h3>
-    <p>todo...</p>
+
+    <h4>2.2.1 Calcul du seuil</h4>
+    <img src="img/report/seuil.jpg" alt="Calcul seuil">
+    <p>Si i' est plus grand que la valeur de a, on garde a comme valeur maximal. L'intervalle s obtenu permet de
+        transformer les pixels compris en valeur noir. Les autres seront définis en tant que pixels blanc pour l'image
+        binaire.</p>
+
+    <h4>2.2.2 Détecter des cercles</h4>
+    <img src="img/report/detect-cell.jpg" alt="Détection de cellules">
+    <p>Ici, l'image est parcourue avec une fenêtre de taille fixe a. Cette dernière comprend un cercle permettant de
+        tester si l'image dans la fenêtre contient une cellule. A chaque itération, l'algorithme contrôle si la fenêtre
+        contient une cellule (tester les pixels du cercle de la fenêtre avec la matrice cercle créée). Si elle ne
+        contient pas de cercle; la fenêtre est déplacée sur la droite d'un pixel. Si la fenêtre contient une cellule, la
+        fenêtre est décallée sur la droite de la taille de cellule.</p>
+    <p>En cas de double détections ou plus, un test est effectuée pour ne pas compter à double des cellules. Leur centre
+        doit être espacée de la taille d'une cellule pour que ces dernières soient comptées comme <strong>cellules
+            différentes</strong>.</p>
 
     <h2>3. Résultats</h2>
 
@@ -174,7 +190,7 @@ Version : 2020.06.20
 
     <h3>3.1 Code source</h3>
     <p>Le mini projet est scanné à l'aide d'un outil de qualité de code source. Les résultats sont les suivants :</p>
-    <img src="img/sonarscan.png" alt="Sonarscan">
+    <img src="img/report/sonarscan.png" alt="Sonarscan">
 
     <h3>3.2 Documentation</h3>
     <p>Une documentation type <strong>TypeDoc</strong> est également générée. <a href="docs/index.html">Voir la
@@ -208,14 +224,24 @@ Version : 2020.06.20
     <h2>5. Références</h2>
     <ul>
         <li>VapidSpace, Converting Images To Grayscale Using The Canvas,
-            <a target="_blank" rel="noopener noreferrer" href="http://www.vapidspace.com/coding/2012/02/26/converting-images-to-grayscale-using-the-canvas/">www.vapidspace.com</a>, 26 février
+            <a target="_blank" rel="noopener noreferrer"
+                href="http://www.vapidspace.com/coding/2012/02/26/converting-images-to-grayscale-using-the-canvas/">www.vapidspace.com</a>,
+            26 février
             2012
         </li>
-        <li>Frédéric Legrand, Traitement d'image : niveaux de gris, <a target="_blank" rel="noopener noreferrer" href="https://www.f-legrand.fr/scidoc/docmml/image/niveaux/images/images.html">www.f-legrand.fr</a>, lu le 5 mai 2020</li>
-        <li>Rahul, async await in image loading, <a target="_blank" rel="noopener noreferrer" href="https://stackoverflow.com/questions/46399223/async-await-in-image-loading">www.stackoverflow.com</a>, 25 septembre 2017</li>
-        <li>tech_geek, Draw horizontal line on chart in chart.js on v2, <a target="_blank" rel="noopener noreferrer" href="https://stackoverflow.com/questions/42691873/draw-horizontal-line-on-chart-in-chart-js-on-v2">www.stackoverflow.com</a>, 9 mars 2017</li>
-        <li>PorkShoulderHolder, mathematical morphology for javascript, <a target="_blank" rel="noopener noreferrer" href="https://github.com/PorkShoulderHolder/morph">www.github.com</a>, 17 août 2018</li>
-        <li>Wikipédia, Circle Hough Transform, <a target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Circle_Hough_Transform">www.wikipedia.org</a>, 1 décembre 2019
+        <li>Frédéric Legrand, Traitement d'image : niveaux de gris, <a target="_blank" rel="noopener noreferrer"
+                href="https://www.f-legrand.fr/scidoc/docmml/image/niveaux/images/images.html">www.f-legrand.fr</a>, lu
+            le 5 mai 2020</li>
+        <li>Rahul, async await in image loading, <a target="_blank" rel="noopener noreferrer"
+                href="https://stackoverflow.com/questions/46399223/async-await-in-image-loading">www.stackoverflow.com</a>,
+            25 septembre 2017</li>
+        <li>tech_geek, Draw horizontal line on chart in chart.js on v2, <a target="_blank" rel="noopener noreferrer"
+                href="https://stackoverflow.com/questions/42691873/draw-horizontal-line-on-chart-in-chart-js-on-v2">www.stackoverflow.com</a>,
+            9 mars 2017</li>
+        <li>PorkShoulderHolder, mathematical morphology for javascript, <a target="_blank" rel="noopener noreferrer"
+                href="https://github.com/PorkShoulderHolder/morph">www.github.com</a>, 17 août 2018</li>
+        <li>Wikipédia, Circle Hough Transform, <a target="_blank" rel="noopener noreferrer"
+                href="https://en.wikipedia.org/wiki/Circle_Hough_Transform">www.wikipedia.org</a>, 1 décembre 2019
         </li>
     </ul>
 

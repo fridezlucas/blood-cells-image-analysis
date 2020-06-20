@@ -8,7 +8,7 @@
 | Titre       | Traitement d'images pour nombre de globules blancs |
 | Date        | 19 juin 2020                                       |
 | Auteur      | Lucas Fridez                                       |
-| Enseignants | Stéphane Gobron & Julien Senn                      |
+| Enseignant  | Stéphane Gobron                                    |
 
 ## Objectifs
 
